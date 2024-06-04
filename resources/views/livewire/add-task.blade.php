@@ -1,7 +1,9 @@
 <div style="background-color: #2c3e50; padding: 20px; border-radius: 10px; color: white; width: 500px; margin: auto;">
+<button id="hideButton" style="height: 20px; width: 20px; float: right; margin-top: 0; padding: 0;" onclick="toggleTaskComponent()"><i class="fa-solid fa-circle-xmark" style="color: #ff0000;"></i></button>
     <form method="POST" action="/addNewTask">
         @csrf
         <div class="mt-4">
+
             <label for="name" style="display: block; margin-bottom: 10px; font-weight: bold;">Taaknaam</label>
             <input id="name" name="name" class="block mt-1 w-full" type="text" style="width: 100%; padding: 10px; border-radius: 5px; border: none; color: black; margin-bottom: 20px;">
             
