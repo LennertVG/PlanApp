@@ -10,7 +10,7 @@
                             <ul>
                                 <li>
                                     <strong>Naam:</strong> {{ $task->name }}<br>
-                                    <strong>Vak ID:</strong> {{ $task->course_id }}<br>
+                                    <strong>Vak:</strong> {{ $task->course->name }}<br>
                                     <strong>Deadline:</strong> {{ $task->formatted_deadline }}<br>
                                     <strong>Beschrijving:</strong> {{ $task->description }}<br>
                                     <strong>Gecreëerd door:</strong> {{ $task->created_by }}<br>
