@@ -1,6 +1,6 @@
 <div style="background-color: #2c3e50; padding: 20px; border-radius: 10px; color: white; width: 500px; margin: auto;">
 <button id="hideButton" style="height: 20px; width: 20px; float: right; margin-top: 0; padding: 0;" onclick="toggleTaskComponent()"><i class="fa-solid fa-circle-xmark" style="color: #ff0000;"></i></button>
-    <form method="POST" action="/addNewTask">
+    <form method="POST" action="{{ route('task.store') }}">
         @csrf
         <div class="mt-4">
 
@@ -30,7 +30,7 @@
             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
             <input type="hidden" name="completed" value="0">
             <input type="hidden" name="created_at" value="{{ date('Y-m-d H:i:s') }}">
-            <input type="hidden" name="createdBy" value="3">
+            <input type="hidden" name="createdBy" value="{{ auth()->user()->role_id }}">
             
             <button type="submit" class="btn btn-primary" style="width: 100%; padding: 10px; border-radius: 5px; background-color: #2980b9; border: none; font-size: 16px; font-weight: bold; color: white;">Taak toevoegen</button>
         </div>
