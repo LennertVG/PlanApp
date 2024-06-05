@@ -19,6 +19,13 @@
                     <option value="{{ $course['id'] }}">{{ $course['name'] }}</option>
                 @endforeach
             </select>
+
+            <label for="taskType" style="display: block; margin-bottom: 10px; font-weight: bold;">Type Taak</label>
+            <select id="taskType" name="taskType" class="block mt-1 w-full" wire:model="taskType" style="width: 100%; padding: 10px; border-radius: 5px; border: none; color: black; margin-bottom: 20px;">
+                @foreach ($taskTypes as $taskType)
+                    <option value="{{ $taskType['id'] }}">{{ $taskType['name'] }}</option>
+                @endforeach
+            </select>
             
             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
             <input type="hidden" name="completed" value="0">

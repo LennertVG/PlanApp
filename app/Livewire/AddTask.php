@@ -8,6 +8,7 @@ class AddTask extends Component
 {
 
     public $courses = [];
+    public $taskTypes = [];
 
     public function render()
     {
@@ -19,16 +20,28 @@ class AddTask extends Component
         $this->courses = [
             [
                 "id" => 1,
-                "name" => "Introduction to Programming"
+                "name" => "Wiskunde"
             ],
             [
                 "id" => 2,
-                "name" => "Web Development Fundamentals"
+                "name" => "Nederlands"
             ],
             [
                 "id" => 3,
-                "name" => "Data Analysis with Python"
+                "name" => "Natuurwetenschappen"
             ]
         ];
+
+        // $this->taskTypes = \App\Models\TaskType::all();
+        $this->taskTypes = [
+            [
+                "id" => 1,
+                "name" => "Samenvatten"
+                ],
+            [
+                "id" => 2,
+                "name" => "Extra Werk"
+            ]
+            ];
     }
 }
