@@ -6,6 +6,7 @@ use App\Models\Task;
 use App\Models\User;
 use TCG\Voyager\Facades\Voyager;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\TasksController;
 
 use App\Http\Controllers\TaskController;
 
@@ -49,11 +50,7 @@ Route::get('/add-task', function () {
     return view('add-task');
 })->name('add-task');
 
-Route::get('/tasks', function () {
-    $title = "Dit zijn alle tasks:";
-    $allUsers = User::with('tasks')->get();
-    return view('tasks', compact('allUsers', 'title'));
-})->name('tasks');
+Route::get('/tasks-by-user', [TaskController::class, 'getTasksByUser'])->name('tasks-by-user');
 
 Route::post('storeTask', [TaskController::class, 'store'])->name('task.store');
 
