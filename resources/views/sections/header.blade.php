@@ -38,7 +38,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="add-task">Toevoegen</a></li>
-                                <li><a class="dropdown-item" href="tasks">Taken</a></li>
+                                <li><a class="dropdown-item" href="tasks-by-user">Taken</a></li>
                             </ul>
                         </li>
                     @if(Auth::guest())
