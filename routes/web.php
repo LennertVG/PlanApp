@@ -37,7 +37,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 // APP FUNCTIONALITY
 
-Route::get('/', function () {
+Route::get('/', [TaskController::class, 'getUpcomingTasksByUser'], function () {
     if (Auth::guest()) {
         return redirect('/login');
     }

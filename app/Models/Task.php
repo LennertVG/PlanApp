@@ -19,4 +19,9 @@ class Task extends Model
     {
         return $this->belongsTo(Course::class, 'course_id');
     }
+
+    public function taskType()
+    {
+        return $this->belongsTo(TaskType::class, 'tasktype_id');
+    }
 }
