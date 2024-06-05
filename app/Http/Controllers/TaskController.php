@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Task;
+use App\Models\User;
 
 class TaskController extends Controller
 {
@@ -22,6 +24,7 @@ class TaskController extends Controller
 
         $task->save();
 
-        return redirect('/add-task');
+        $task->users()->attach(Auth::id(), ['completed' => 0]);
+        return redirect('/add-task')->with('success', 'Task created and assigned to user successfully.');
     }
 }
