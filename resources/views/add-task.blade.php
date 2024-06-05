@@ -1,5 +1,6 @@
 @extends('sections.app')
     @section('content')
+        <div>
             @if(Auth::user())
                 <button id="displayButton" class="fixed top-0 right-0 p-6 text-right" onclick="toggleTaskComponent()">Taak toevoegen</button>
 
@@ -9,6 +10,5 @@
                     </div>
                 </div>
             @endif
-
         </div>
     @endsection
