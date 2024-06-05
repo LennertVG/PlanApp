@@ -32,7 +32,7 @@ class TaskController extends Controller
     public function getTasksByUser()
     {
         $user = Auth::user()->id;
-        $userWithTasks = User::with('tasks')->find($user);
+        $userWithTasks = User::with('tasks.course')->find($user);
         $tasks = $userWithTasks->tasks->map(function ($task) {
             $task->formatted_deadline = Carbon::parse($task->deadline)->format('d-m-Y');
             return $task;

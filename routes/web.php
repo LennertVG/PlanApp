@@ -6,8 +6,6 @@ use App\Models\Task;
 use App\Models\User;
 use TCG\Voyager\Facades\Voyager;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\TasksController;
-
 use App\Http\Controllers\TaskController;
 
 /*
