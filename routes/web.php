@@ -7,6 +7,8 @@ use App\Models\User;
 use TCG\Voyager\Facades\Voyager;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Controllers\TaskController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,5 +54,7 @@ Route::get('/tasks', function () {
     $allUsers = User::with('tasks')->get();
     return view('tasks', compact('allUsers', 'title'));
 })->name('tasks');
+
+Route::post('storeTask', [TaskController::class, 'store'])->name('task.store');
 
 require __DIR__ . '/auth.php';
