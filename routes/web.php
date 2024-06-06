@@ -36,12 +36,13 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 // APP FUNCTIONALITY
-
-Route::get('/', [TaskController::class, 'getUpcomingTasksByUser'], function () {
+Route::get('/', function () {
     if (Auth::guest()) {
         return redirect('/login');
+    } else {
+        $taskController = app(TaskController::class);
+        return $taskController->getUpcomingTasksByUser();
     }
-    return view('home');
 })->name('home');
 
 Route::get('/add-task', function () {
@@ -51,5 +52,10 @@ Route::get('/add-task', function () {
 Route::get('/tasks-by-user', [TaskController::class, 'getTasksByUser'])->name('tasks-by-user');
 
 Route::post('storeTask', [TaskController::class, 'store'])->name('task.store');
+
+// ADMIN VOYAGER FUNCTIONALITY
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
 
 require __DIR__ . '/auth.php';
