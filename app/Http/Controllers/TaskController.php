@@ -31,23 +31,31 @@ class TaskController extends Controller
 
     public function getTasksByUser()
     {
-        $user = Auth::user()->id;
-        $userWithTasks = User::with('tasks.course')->find($user);
-        $tasks = $userWithTasks->tasks->map(function ($task) {
-            $task->formatted_deadline = Carbon::parse($task->deadline)->format('d-m-Y');
-            return $task;
-        });
-        return view('tasks_by_user', compact('tasks'));
+        if (Auth::check()) {
+            $user = Auth::user()->id;
+            $userWithTasks = User::with('tasks.course')->find($user);
+            $tasks = $userWithTasks->tasks->map(function ($task) {
+                $task->formatted_deadline = Carbon::parse($task->deadline)->format('d-m-Y');
+                return $task;
+            });
+            return view('tasks_by_user', compact('tasks'));
+        } else {
+            return redirect('/'); // Redirect to home screen
+        }
     }
 
     public function getUpcomingTasksByUser()
     {
-        $user = Auth::user()->id;
-        $userWithTasks = User::with('tasks.course')->find($user);
-        $tasks = $userWithTasks->tasks->map(function ($task) {
-            $task->formatted_deadline = Carbon::parse($task->deadline)->format('d-m-Y');
-            return $task;
-        });
-        return view('home', ['tasks' => $tasks]); // Pass the tasks to the view
+        if (Auth::check()) {
+            $user = Auth::user()->id;
+            $userWithTasks = User::with('tasks.course')->find($user);
+            $tasks = $userWithTasks->tasks->map(function ($task) {
+                $task->formatted_deadline = Carbon::parse($task->deadline)->format('d-m-Y');
+                return $task;
+            });
+            return view('home', ['tasks' => $tasks]); // Pass the tasks to the view
+        } else {
+            return redirect('/'); // Redirect to home screen
+        }
     }
 }
