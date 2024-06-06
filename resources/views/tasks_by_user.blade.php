@@ -5,7 +5,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                        <h1>Tasks by user</h1>
+                        <h2>Tasks by user</h2>
                         @foreach ($tasks as $task)
                             <ul>
                                 <li>
