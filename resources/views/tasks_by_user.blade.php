@@ -15,6 +15,11 @@
                                     <strong>Beschrijving:</strong> {{ $task->description }}<br>
                                     <strong>Gecreëerd door:</strong> {{ $task->created_by }}<br>
                                     <strong>Taaktype ID:</strong> {{ $task->tasktype_id }}<br>
+                                    <form action="{{ route('task.confirmCompletion', $task->id) }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="task_id" value="{{ $task->id }}">
+                                        <button type="submit">Markeren als voltooid</button>
+                                    </form>
                                 </li>
                             </ul>
                         @endforeach
