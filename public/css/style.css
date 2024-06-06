@@ -4,6 +4,8 @@ h2 {
     font-size: 20px;
 }
 
+
+/* homepage */
 .container {
     display: flex;
     flex-direction: column;
