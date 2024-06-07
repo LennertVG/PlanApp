@@ -58,6 +58,7 @@ class TaskController extends Controller
             return redirect('/'); // Redirect to home screen
         }
     }
+
     public function confirmCompletion(Request $request)
     {
         $task = Task::find($request->task_id);
@@ -105,8 +106,9 @@ class TaskController extends Controller
             $user->xp += 2;
         }
     
-        if ($user->xp >= 100) {
-            $user->xp = $user->xp - 100;
+        $requiredXp = ($user->level + 1) * 100;
+        if ($user->xp >= $requiredXp) {
+            $user->xp = $user->xp - $requiredXp;
             $user->coins += 100;
             $user->level += 1;
         }
