@@ -43,7 +43,7 @@
                                     </tbody>
                                 </table>
                                 @if ($task->uploadPath == 'NULL' || $task->uploadPath == NULL || !$task->uploadPath)
-                                <form method="POST" action="/upload-task-file">
+                                <form method="POST" action="/upload-task-file" enctype="multipart/form-data">
                                     
                                     @csrf
 
