@@ -53,9 +53,4 @@ Route::get('/tasks-by-user', [TaskController::class, 'getTasksByUser'])->name('t
 
 Route::post('storeTask', [TaskController::class, 'store'])->name('task.store');
 
-// ADMIN VOYAGER FUNCTIONALITY
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
-
 require __DIR__ . '/auth.php';
