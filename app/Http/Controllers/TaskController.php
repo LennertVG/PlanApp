@@ -58,4 +58,63 @@ class TaskController extends Controller
             return redirect('/'); // Redirect to home screen
         }
     }
+
+    public function confirmCompletion(Request $request)
+    {
+        $task = Task::find($request->task_id);
+        
+        if (!$task) {
+            Log::error('Task not found for task_id: ' . $request->task_id);
+            return redirect('/tasks-by-user')->with('error', 'Task not found.');
+        }
+    
+        $user = Auth::user();
+    
+        // Get the pivot record for the task and the authenticated user
+        $pivotRecord = $task->users()->where('user_id', $user->id)->first();
+    
+        if (!$pivotRecord) {
+            Log::error('Pivot record not found for user_id: ' . $user->id . ' and task_id: ' . $request->task_id);
+            return redirect('/tasks-by-user')->with('error', 'Pivot record not found.');
+        }
+    
+        // Update the pivot table to mark the task as completed
+        $task->users()->updateExistingPivot($user->id, ['completed' => 1]);
+    
+        $submittedAt = Carbon::parse($pivotRecord->pivot->submitted_at);
+        $deadline = Carbon::parse($task->deadline);
+        $createdAt = Carbon::parse($task->created_at);
+        // dd($submittedAt, $deadline, $createdAt);
+    
+        if ($submittedAt < $deadline) {
+            $user->streakCount += 1;
+
+            $timeDifference = $submittedAt->diffInSeconds($createdAt);
+            $totalTime = $deadline->diffInSeconds($createdAt);
+            // dd($timeDifference, $totalTime);
+    
+            if (($timeDifference / $totalTime) < 0.2) {
+                $user->coins += 10;
+                $user->xp += 10;
+            } else {
+                $user->coins += 5;
+                $user->xp += 5;
+            }
+        } else {
+            $user->streakCount = 0;
+            $user->coins += 2;
+            $user->xp += 2;
+        }
+    
+        $requiredXp = ($user->level + 1) * 100;
+        if ($user->xp >= $requiredXp) {
+            $user->xp = $user->xp - $requiredXp;
+            $user->coins += 100;
+            $user->level += 1;
+        }
+    
+        $user->save();
+    
+        return redirect('/tasks-by-user')->with('success', 'Task completed successfully.');
+    }
 }

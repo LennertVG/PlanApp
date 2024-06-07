@@ -58,4 +58,7 @@ Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 
+// route for completing a task
+Route::post('/complete-task', [TaskController::class, 'confirmCompletion'])->name('task.confirmCompletion');
+
 require __DIR__ . '/auth.php';
