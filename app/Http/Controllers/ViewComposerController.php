@@ -9,12 +9,12 @@ use App\Http\Controllers\Controller;
 
 class ViewComposerController extends Controller
 {
-    public function home()
+    public function getTasksByUsersForHome()
     {
         return view('home', []);
     }
 
-    public function getTasksByUser()
+    public function getTasksByUsersForTasks()
     {
         return view('tasks-by-user', []);
     }
