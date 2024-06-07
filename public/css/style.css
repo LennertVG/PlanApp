@@ -1,7 +1,14 @@
 /* Voorbeeld H2, mag later zeker veranderd worden, gewoon checken of het werkt!... */
 h2 {
-    font-family: monospace;
-    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    ;
+}
+
+h3 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.25rem;
+    font-weight: bold;
 }
 
 
@@ -12,7 +19,7 @@ h2 {
     font-family: 'Roboto', sans-serif;
 }
 
-.date { 
+.date {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -74,17 +81,17 @@ p {
 
 /* Modal styles */
 .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1; 
-    padding-top: 60px; 
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 60px;
     left: 0;
     top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
@@ -92,8 +99,9 @@ p {
     margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; 
-    max-width: 600px;  /* Limit the width of the modal */
+    width: 80%;
+    max-width: 600px;
+    /* Limit the width of the modal */
     border-radius: 14px;
 }
 
@@ -109,4 +117,38 @@ p {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+/* TASKS-PAGE */
+
+.titlecontainer-tasks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 14px;
+    padding: 10px;
+    background-color: #444B6E;
+    color: white;
+}
+
+.table.task-cards {
+    font-size: 0.9rem;
+}
+
+@media (max-width: 992px) {
+    .custom-grid-tasks .col {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+@media (max-width: 772px) {
+    .custom-grid-tasks .col {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
 }

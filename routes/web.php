@@ -30,11 +30,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// ADMIN VOYAGER FUNCTIONALITY
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
-
 // APP FUNCTIONALITY
 Route::get('/', function () {
     if (Auth::guest()) {
@@ -52,5 +47,13 @@ Route::get('/add-task', function () {
 Route::get('/tasks-by-user', [TaskController::class, 'getTasksByUser'])->name('tasks-by-user');
 
 Route::post('storeTask', [TaskController::class, 'store'])->name('task.store');
+
+// ADMIN VOYAGER FUNCTIONALITY
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
+
+// route for completing a task
+Route::post('/complete-task', [TaskController::class, 'confirmCompletion'])->name('task.confirmCompletion');
 
 require __DIR__ . '/auth.php';
