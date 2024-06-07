@@ -38,8 +38,8 @@ Route::get('/add-task', function () {
     return view('add-task');
 })->name('add-task');
 
-Route::get('/tasks-by-user', [ViewComposerController::class, 'getTasksByUser'])->name('tasks-by-user');
-Route::get('/', [ViewComposerController::class, 'home'])->name('home');
+Route::get('/tasks-by-user', [ViewComposerController::class, 'getTasksByUsersForTasks'])->name('tasks-by-user');
+Route::get('/', [ViewComposerController::class, 'getTasksByUsersForHome'])->name('home');
 
 Route::post('storeTask', [TaskController::class, 'store'])->name('task.store');
 // route for completing a task
