@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Task;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class TaskController extends Controller
 {
@@ -44,21 +45,6 @@ class TaskController extends Controller
         }
     }
 
-    public function getUpcomingTasksByUser()
-    {
-        if (Auth::check()) {
-            $user = Auth::user()->id;
-            $userWithTasks = User::with('tasks.course')->find($user);
-            $tasks = $userWithTasks->tasks->map(function ($task) {
-                $task->formatted_deadline = Carbon::parse($task->deadline)->format('d-m-Y');
-                return $task;
-            });
-            return view('home', ['tasks' => $tasks]); // Pass the tasks to the view
-        } else {
-            return redirect('/'); // Redirect to home screen
-        }
-    }
-
     public function confirmCompletion(Request $request)
     {
         $task = Task::find($request->task_id);
@@ -84,21 +70,32 @@ class TaskController extends Controller
         $submittedAt = Carbon::parse($pivotRecord->pivot->submitted_at);
         $deadline = Carbon::parse($task->deadline);
         $createdAt = Carbon::parse($task->created_at);
-        // dd($submittedAt, $deadline, $createdAt);
+    
+        $rewardMultiplier = 1;
+    
+        // Determine the reward multiplier based on the streak count
+        if ($user->streakCount >= 20) {
+            $rewardMultiplier = 2;
+        } elseif ($user->streakCount >= 15) {
+            $rewardMultiplier = 1.75;
+        } elseif ($user->streakCount >= 10) {
+            $rewardMultiplier = 1.5;
+        } elseif ($user->streakCount >= 5) {
+            $rewardMultiplier = 1.25;
+        }
     
         if ($submittedAt < $deadline) {
             $user->streakCount += 1;
-
+    
             $timeDifference = $submittedAt->diffInSeconds($createdAt);
             $totalTime = $deadline->diffInSeconds($createdAt);
-            // dd($timeDifference, $totalTime);
     
             if (($timeDifference / $totalTime) < 0.2) {
-                $user->coins += 10;
-                $user->xp += 10;
+                $user->coins += 10 * $rewardMultiplier;
+                $user->xp += 10 * $rewardMultiplier;
             } else {
-                $user->coins += 5;
-                $user->xp += 5;
+                $user->coins += 5 * $rewardMultiplier;
+                $user->xp += 5 * $rewardMultiplier;
             }
         } else {
             $user->streakCount = 0;
