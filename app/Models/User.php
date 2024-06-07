@@ -45,6 +45,6 @@ class User extends \TCG\Voyager\Models\User
 
     public function tasks()
     {
-        return $this->belongsToMany(Task::class);
+        return $this->belongsToMany(Task::class)->withPivot('uploadPath');
     }
 }
