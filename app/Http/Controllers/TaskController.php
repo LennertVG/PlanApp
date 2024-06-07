@@ -37,11 +37,12 @@ class TaskController extends Controller
             $userWithTasks = User::with('tasks.course')->find($user);
             $tasks = $userWithTasks->tasks->map(function ($task) {
                 $task->formatted_deadline = Carbon::parse($task->deadline)->format('d-m-Y');
+                $task->uploadPath = $task->pivot->uploadPath;
                 return $task;
             });
-            return $tasks; // Return tasks instead of the view
+            return $tasks;
         } else {
-            return null; // Return null if not authenticated
+            return null;
         }
     }
 

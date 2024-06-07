@@ -36,8 +36,46 @@
                                             <th scope="row">Gecreëerd door:</th>
                                             <td>{{ $task->created_by }}</td>
                                         </tr>
+                                        <tr>
+                                            <th scope="row">Upload:</th>
+                                            <td><a href="{{ $task->uploadPath }}">{{ $task->uploadPath }}</a></td>
+                                        </tr>
                                     </tbody>
                                 </table>
+                                @if ($task->uploadPath == 'NULL' || $task->uploadPath == NULL || !$task->uploadPath)
+                                <form method="POST" action="/upload-task-file" enctype="multipart/form-data">
+                                    
+                                    @csrf
+
+                                    <input type="hidden" name="task_id" value="{{ $task->id }}">
+                                    
+                                    <input type="file" name="task_file">
+
+                                    <button type="submit">Upload File</button>
+                                        @if ($errors->any())
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
+
+                                        @if (session('error'))
+                                            <div class="alert alert-danger">
+                                                {{ session('error') }}
+                                            </div>
+                                        @endif
+
+                                        @if (session('succes'))
+                                            <div class="alert alert-success">
+                                                {{ session('success') }}
+                                            </div>
+                                        @endif
+
+                                </form>
+                                @endif                               
                             </p>
                         </div>
                     </div>

@@ -8,6 +8,7 @@ use TCG\Voyager\Facades\Voyager;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ViewComposerController;
+use App\Http\Controllers\FileUploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,7 @@ Route::post('storeTask', [TaskController::class, 'store'])->name('task.store');
 // route for completing a task
 Route::post('/complete-task', [TaskController::class, 'confirmCompletion'])->name('task.confirmCompletion');
 
+Route::post('/upload-task-file', [FileUploadController::class, 'uploadTaskFile']);
 
 // ADMIN VOYAGER FUNCTIONALITY
 Route::group(['prefix' => 'admin'], function () {
