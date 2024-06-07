@@ -44,7 +44,14 @@ Stage 3 will focus on the completion of all components in regards of bug-fixing,
 - Laravel Breeze Login/Registration service<br>
 
 <h3>Collaborators:</h3>
+<b>Developers</b>
 
 - [Cisse Belmans](https://github.com/Ciisse)
 - [John Op De Locht](https://github.com/jopdelocht)
 - [Lennert Van Genechten](https://github.com/LennertVG)
+
+
+<br>
+<b>Teacher</b>
+
+- [Lauren Metten](https://www.linkedin.com/in/lauren-metten-6b2828194/)
