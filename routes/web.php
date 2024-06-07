@@ -30,11 +30,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// ADMIN VOYAGER FUNCTIONALITY
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
-
 // APP FUNCTIONALITY
 Route::get('/', function () {
     if (Auth::guest()) {
