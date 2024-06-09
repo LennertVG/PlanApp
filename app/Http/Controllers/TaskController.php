@@ -8,6 +8,8 @@ use App\Models\Task;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use App\Models\Course;
+use App\Models\TaskType;
 
 class TaskController extends Controller
 {
@@ -27,24 +29,26 @@ class TaskController extends Controller
         $task->save();
 
         $task->users()->attach(Auth::id(), ['completed' => 0]);
-        return redirect('/add-task')->with('success', 'Task created and assigned to user successfully.');
+        return redirect('/')->with('success', 'Task created and assigned to user successfully.');
     }
 
     public function getTasksByUser()
     {
         if (Auth::check()) {
             $user = Auth::user()->id;
-            $userWithTasks = User::with('tasks.course')->find($user);
+            $userWithTasks = User::with(['tasks' => function ($query) {
+                $query->with('course')->select('*'); // Include deadline and other necessary attributes
+            }])->find($user);
+
             $tasks = $userWithTasks->tasks->map(function ($task) {
                 $task->formatted_deadline = Carbon::parse($task->deadline)->format('d-m-Y');
                 $task->uploadPath = $task->pivot->uploadPath;
                 return $task;
             });
             return $tasks;
-        } else {
-            return null;
         }
     }
+    
 
     public function confirmCompletion(Request $request)
     {

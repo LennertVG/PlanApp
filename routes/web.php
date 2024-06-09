@@ -43,6 +43,7 @@ Route::get('/tasks-by-user', [ViewComposerController::class, 'getTasksByUsersFor
 Route::get('/', [ViewComposerController::class, 'getTasksByUsersForHome'])->name('home');
 
 Route::post('storeTask', [TaskController::class, 'store'])->name('task.store');
+
 // route for completing a task
 Route::post('/complete-task', [TaskController::class, 'confirmCompletion'])->name('task.confirmCompletion');
 
