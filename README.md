@@ -1,66 +1,57 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<h1>Project PlanApp - Gamified Planner App</h1>
+<h3>Background and concept</h3>
+This project is a collaboration between a group of students at SyntraPXL (developers) and a student of PXL Education (high school teacher).
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+The developers were approached by the high school teacher in regards to a concept for a gamified planner app designed for visual learners, to help them manage planning, make it more enjoyable and make it more visual than a generic task-list.
 
-## About Laravel
+The project has been divided in 3 stages (as described below) in function of the deadlines assigned to the developers and teacher. 
+<h3>Stage 1</h3>
+<b>Stage 1 will run from the start of the project until the developers' deadline (31/05/2024 - 26/06/2024)</b>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+In this stage the main functionality for the pupil interface of the planner will be created. The features described are the following:
+- The pupil is able to create tasks with an intuitive interface
+	- These tasks will be displayed in a manner to facilitate the visual thinkers
+	- These tasks will be coupled to the pupils and their courses
+	- In the future (see stage 2) tasks can be mass-assigned by teachers as well
+- The pupil is able to upload evidence of the completion of a task
+	- This can be in a variety of formats: pdf, doc, docx
+- Once the pupil has uploaded this evidence, the teacher can confirm the completion of a task
+	- Upon completion the pupil gets the following benefits
+		- Coins
+		- XP
+		- Upon uploading in time: streak goes up
+			- Upon reaching a streak of 5, 10, 15 and 20+, the pupil will gain increased coins and XP
+		- After assignment of the aforementioned XP, if the pupil has enough XP they will level up, granting them coins 
+	- These benefits will be displayed in the nav-bar for the student
+- The pupil will be able to use these coins for rewards including but not limited to
+	- Using headphones during individual work
+	- The ability to skip a question asked by the teacher during class
+	- ...
+- If time permits a start of stage 2 will be made
+<h3>Stage 2</h3>
+<b>Stage 2 will run from the developers' deadline until the teacher's deadline (25/06/2024 - end of august 2024)</b>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Stage 2 will focus on refining the components of stage 1, creating a proper platform for teachers to mass assign tasks per class, more functionality for the class-group system, getting a workable first prototype up and running and more.
+<h3>Stage 3</h3>
+<b>Stage 3 will run from the teacher's deadline until a release date which is TBD (end of august 2024 - ?)</b>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Stage 3 will focus on the completion of all components in regards of bug-fixing, future-proofing, privacy-regulations, and polishing of all kinds. The exact work which needs to be done is also dependant on the succes of completing stage 1 and stage 2.
 
-## Learning Laravel
+<h3>Tech Stack</h3>
+- Laravel (PHP Framework)<br>
+- Livewire<br>
+- Laravel Voyager Admin Panel<br>
+- Laravel Breeze Login/Registration service<br>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<h3>Collaborators:</h3>
+<b>Developers</b>
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- [Cisse Belmans](https://github.com/Ciisse)
+- [John Op De Locht](https://github.com/jopdelocht)
+- [Lennert Van Genechten](https://github.com/LennertVG)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+<br>
+<b>Teacher</b>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- [Lauren Metten](https://www.linkedin.com/in/lauren-metten-6b2828194/)

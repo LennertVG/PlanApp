@@ -10,12 +10,12 @@ use Carbon\Carbon;
 
 class ViewComposerController extends Controller
 {
-    public function home()
+    public function getTasksByUsersForHome()
     {
         return view('home', []);
     }
 
-    public function getTasksByUser()
+    public function getTasksByUsersForTasks()
     {
         if (Auth::check()) {
             $user = Auth::user()->id;
