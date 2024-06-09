@@ -40,8 +40,8 @@ Route::get('/add-task', function () {
 
 Route::get('/tasks-by-user', [ViewComposerController::class, 'getTasksByUser'])->name('tasks-by-user');
 Route::get('/', [ViewComposerController::class, 'home'])->name('home');
-
 Route::post('storeTask', [TaskController::class, 'store'])->name('task.store');
+
 // route for completing a task
 Route::post('/complete-task', [TaskController::class, 'confirmCompletion'])->name('task.confirmCompletion');
 
