@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="titlecontainer-tasks">
-                <h2>Hieronder alle taken van {{ Auth::user()->name }}</h2>
+                <h2>Hieronder alle taken van: <strong> {{ Auth::user()->firstname }}</strong></h2>
             </div>
             <div class="row row-cols-1 row-cols-md-3 g-4 custom-grid-tasks">
                 @foreach ($tasks as $task)
