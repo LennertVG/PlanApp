@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const modal = document.getElementById("taskModal");
     const span = document.getElementsByClassName("close")[0];
     const tasks = Array.from(document.getElementsByClassName("task"));
+    const addTaskButton = document.getElementById("addTaskButton");
+    const taskForm = document.getElementById("taskForm");
+    const taskFormClose = document.getElementById("taskFormClose");
 
     tasks.forEach(task => {
         task.onclick = function(event) {
@@ -23,12 +26,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
+        } else if (event.target == taskForm) {
+            taskForm.style.display = "none";
         }
     }
-
-    const addTaskButton = document.getElementById("addTaskButton");
-    const taskForm = document.getElementById("taskForm");
-    const hideButton = document.getElementById("hideButton");
 
     function toggleTaskComponent() {
         taskForm.style.display = taskForm.style.display === "none" ? "block" : "none";
@@ -39,9 +40,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
         toggleTaskComponent();
     }
 
-    hideButton.onclick = function(event) {
+    taskFormClose.onclick = function(event) {
         event.stopPropagation();
-        toggleTaskComponent();
+        taskForm.style.display = "none";
     }
 
     document.addEventListener('click', function(event) {

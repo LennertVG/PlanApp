@@ -26,21 +26,21 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/">PlanApp</a>
-                @if(Auth::user())
+                {{-- @if(Auth::user())
                     <div class="d-block d-lg-none">
                         @livewire('userstats')
                     </div>
-                @endif
+                @endif --}}
                                
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
-                        <li class="nav-item dropdown" style="padding-top: 1.1rem;">
+                        <li class="nav-item dropdown" style="display: flex; align-items: center;">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Taken
                             </a>
@@ -50,7 +50,7 @@
                             </ul>
                         </li>
                     @if(Auth::guest())
-                        <li class="nav-item dropdown" style="padding-top: 1.1rem;">
+                        <li class="nav-item dropdown" style="display: flex; align-items: center;">
                             <a class="nav-link dropdown-toggle" href="/account" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Account
                             </a>
@@ -60,7 +60,7 @@
                             </ul>
                         </li>
                     @else
-                        <li class="nav-item dropdown" style="padding-top: 1.1rem;">
+                        <li class="nav-item dropdown" style="display: flex; align-items: center;">
                             <a class="nav-link dropdown-toggle" href="/account" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ Auth::user()->name }}
                             </a>
@@ -72,9 +72,9 @@
                                 </form>
                             </ul>
                         </li>
-                        <div class="d-none d-lg-block">
+                        {{-- <div class="d-none d-lg-block">
                             @livewire('userstats')
-                        </div>
+                        </div> --}}
                     @endif
 
                 </ul>
