@@ -7,6 +7,12 @@
             $courses = \App\Models\Course::all();
         ?>
 
+        @if(Auth::user())
+            <div class="stats">
+                @livewire('userstats')
+            </div>
+        @endif
+
         <div class="container">
             <div class="date">
                 <h1>{{ date('d/m/Y') }}</h1>
@@ -35,42 +41,45 @@
                         </div>
                     @endforeach
                 </div>
-                <div id="taskForm" style="display: none; background-color: #2c3e50; padding: 20px; border-radius: 10px; color: white; width: 500px; position: fixed; z-index: 1000; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                    <button id="hideButton" style="height: 20px; width: 20px; float: right; margin-top: 0; padding: 0;"><i class="fa-solid fa-circle-xmark" style="color: #ff0000;"></i></button>
-                    <form method="POST" action="{{ route('task.store') }}">
-                        @csrf
-                        <div class="mt-4">
-                            <label for="name" style="display: block; margin-bottom: 10px; font-weight: bold;">Task Name</label>
-                            <input id="name" name="name" class="block mt-1 w-full" type="text" style="width: 100%; padding: 10px; border-radius: 5px; border: none; color: black; margin-bottom: 20px;">
-                            
-                            <label for="description" style="display: block; margin-bottom: 10px; font-weight: bold;">Description</label>
-                            <textarea id="description" name="description" class="block mt-1 w-full" style="width: 100%; padding: 10px; border-radius: 5px; border: none; color: black; height: 100px; margin-bottom: 20px;"></textarea>
-                            
-                            <label for="deadline" style="display: block; margin-bottom: 10px; font-weight: bold;">Deadline</label>
-                            <input id="deadline" name="deadline" class="block mt-1 w-full" type="date" style="width: 100%; padding: 10px; border-radius: 5px; border: none; color: black; margin-bottom: 20px;">
-                            
-                            <label for="course" style="display: block; margin-bottom: 10px; font-weight: bold;">Course</label>
-                            <select id="course" name="course" class="block mt-1 w-full" style="width: 100%; padding: 10px; border-radius: 5px; border: none; color: black; margin-bottom: 20px;">
-                                @foreach ($courses as $course)
-                                    <option value="{{ $course['id'] }}">{{ $course['name'] }}</option>
-                                @endforeach
-                            </select>
 
-                            <label for="taskType" style="display: block; margin-bottom: 10px; font-weight: bold;">Task Type</label>
-                            <select id="taskType" name="taskType" class="block mt-1 w-full" style="width: 100%; padding: 10px; border-radius: 5px; border: none; color: black; margin-bottom: 20px;">
-                                @foreach ($taskTypes as $taskType)
-                                    <option value="{{ $taskType['id'] }}">{{ $taskType['name'] }}</option>
-                                @endforeach
-                            </select>
-                            
-                            <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-                            <input type="hidden" name="completed" value="0">
-                            <input type="hidden" name="created_at" value="{{ date('Y-m-d H:i:s') }}">
-                            <input type="hidden" name="createdBy" value="{{ auth()->user()->role_id }}">
-                            
-                            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 10px; border-radius: 5px; background-color: #2980b9; border: none; font-size: 16px; font-weight: bold; color: white;">Add Task</button>
-                        </div>
-                    </form>
+                <div id="taskForm" class="modal">
+                    <div class="modal-content">
+                        <span class="close" id="taskFormClose">&times;</span>
+                        <form method="POST" action="{{ route('task.store') }}">
+                            @csrf
+                            <div class="form-group">
+                                <label for="name">Task Name</label>
+                                <input id="name" name="name" class="form-control mb-2" type="text">
+
+                                <label for="description">Description</label>
+                                <textarea id="description" name="description" class="form-control mb-2"></textarea>
+
+                                <label for="deadline">Deadline</label>
+                                <input id="deadline" name="deadline" class="form-control mb-2" type="date">
+
+                                <label for="course">Course</label>
+                                <select id="course" name="course" class="form-control mb-2">
+                                    @foreach ($courses as $course)
+                                        <option value="{{ $course['id'] }}">{{ $course['name'] }}</option>
+                                    @endforeach
+                                </select>
+
+                                <label for="taskType">Task Type</label>
+                                <select id="taskType" name="taskType" class="form-control mb-2">
+                                    @foreach ($taskTypes as $taskType)
+                                        <option value="{{ $taskType['id'] }}">{{ $taskType['name'] }}</option>
+                                    @endforeach
+                                </select>
+
+                                <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                                <input type="hidden" name="completed" value="0">
+                                <input type="hidden" name="created_at" value="{{ date('Y-m-d H:i:s') }}">
+                                <input type="hidden" name="createdBy" value="{{ auth()->user()->role_id }}">
+
+                                <button type="submit" class="btn btn-primary w-100">Add Task</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
