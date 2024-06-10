@@ -22,17 +22,25 @@ use App\Http\Controllers\FileUploadController;
 */
 
 // LOGIN, REGISTRATION, ACCOUNT, BREEZE
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// ADMIN VOYAGER FUNCTIONALITY
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
 
+
+Route::middleware('auth:sanctum')->group(function () { //Start routes requiring sanctum
+    
+
+// DASHBOARD VIEW
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 // APP FUNCTIONALITY
 Route::get('/add-task', function () {
@@ -49,10 +57,6 @@ Route::post('/complete-task', [TaskController::class, 'confirmCompletion'])->nam
 
 Route::post('/upload-task-file', [FileUploadController::class, 'uploadTaskFile']);
 
-// ADMIN VOYAGER FUNCTIONALITY
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
-
+}); //end routes requiring sanctum
 
 require __DIR__ . '/auth.php';
