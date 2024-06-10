@@ -62,7 +62,7 @@
                     @else
                         <li class="nav-item dropdown" style="padding-top: 1.1rem;">
                             <a class="nav-link dropdown-toggle" href="/account" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ Auth::user()->name }}
+                                {{ Auth::user()->firstname }}
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="/profile">Settings</a></li>
