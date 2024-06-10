@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Services\CalculationService;
 
 class Userstats extends Component
 {
@@ -16,14 +17,22 @@ class Userstats extends Component
     public $progressPercentage;
     public $maxXp;
 
+    protected $calculationService;
+
+    public function mount(CalculationService $calculationService)
+    {
+        $this->calculationService = $calculationService;
+        $this->updateStats();
+    }
+
+    public function hydrate(CalculationService $calculationService)
+    {
+        $this->calculationService = $calculationService;
+    }
+
     public function render()
     {
         return view('livewire.userstats');
-    }
-
-    public function mount()
-    {
-        $this->updateStats();
     }
 
     public function updateStats()
@@ -35,9 +44,9 @@ class Userstats extends Component
         $this->level = $this->user->level;
         $this->coins = $this->user->coins;
 
-        $xpRequiredForNextLevel = ($this->level + 1) * 100;
-        $this->maxXp = $xpRequiredForNextLevel;
-        $this->progressPercentage = ($this->xp / $xpRequiredForNextLevel) * 100;
+        $requiredXp = $this->calculationService->calculateRequiredXp();
+        $this->maxXp = $requiredXp;
+        $this->progressPercentage = ($this->xp / $requiredXp) * 100;
         $this->progressPercentage = max(0, min(100, $this->progressPercentage));
         $this->progressPercentage = number_format($this->progressPercentage, 1);
     }

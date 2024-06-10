@@ -79,6 +79,12 @@
                             </p>
                         </div>
                     </div>
+                {{-- button to confirm completion --}}
+                <form method="POST" action="{{ route('task.confirmCompletion') }}">
+                    @csrf
+                    <input type="hidden" name="task_id" value="{{ $task->user_id }}">
+                    <button type="submit">Taak voltooid</button>
+                </form>
                 </div>
                 @endforeach
             </div>
