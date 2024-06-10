@@ -7,19 +7,13 @@
             $courses = \App\Models\Course::all();
         ?>
 
-        @if(Auth::user())
-            <div class="stats">
-                @livewire('userstats')
-            </div>
-        @endif
-
         <div class="container">
             <div class="date">
                 <h1>{{ date('d/m/Y') }}</h1>
             </div>
             <div class="tasks">
-                <h2 class="title">Upcoming tasks</h2>
-                <button id="addTaskButton" class="btn btn-success">Add Task</button>
+                <h2 class="title">Deadlines</h2>
+                <button id="addTaskButton" class="btn btn-success mb-2">Taak toevoegen</button>
                 <div class="task-list">
                     @foreach ($tasks->filter(function ($task) {
                         return $task->deadline >= now();

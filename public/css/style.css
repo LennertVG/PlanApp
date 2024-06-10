@@ -2,7 +2,6 @@
 h2 {
     font-family: 'Roboto', sans-serif;
     font-size: 1.5rem;
-    ;
 }
 
 h3 {
@@ -10,11 +9,6 @@ h3 {
     font-size: 1.25rem;
     font-weight: bold;
 }
-
-body {
-    padding-top: 4rem;
-}
-
 
 /* homepage */
 .container {
@@ -33,10 +27,6 @@ body {
     padding: 10px;
 }
 
-.title {
-    margin-bottom: 1rem !important;
-}
-
 h1 {
     margin: 0 !important;
 }
@@ -51,6 +41,7 @@ p {
     align-items: center;
     justify-content: center;
     margin-top: 1rem;
+    margin-bottom: 1rem;
     border: 1px solid #ccc;
     border-radius: 14px;
     padding: 10px;
@@ -158,9 +149,20 @@ p {
     }
 }
 
-.stats {
-    position: fixed;
-    top: 4rem; /* Adjust this value based on the height of your navbar */
-    right: 0;
-    /* width: 20%; */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 5rem;
+}
+.userstats-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.navbar-content {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
 }
