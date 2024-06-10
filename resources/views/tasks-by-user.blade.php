@@ -17,27 +17,31 @@
                                 <table class="table task-cards">
                                     <tbody>
                                         <tr>
-                                            <th scope="row">Naam:</th>
+                                            <th class="table-head" scope="row">Naam:</th>
                                             <td>{{ $task->name }}</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">Vak:</th>
+                                            <th class="table-head" scope="row">Vak:</th>
                                             <td>{{ $task->course->name }}</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">Deadline:</th>
+                                            <th class="table-head" scope="row">Deadline:</th>
                                             <td>{{ $task->formatted_deadline }}</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">Beschrijving:</th>
-                                            <td>{{ $task->description }}</td>
+                                            <th class="table-head" scope="row">Beschrijving:</th>
+                                            <td>
+                                                <div class="scrollarea">
+                                                {{ $task->description }}
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">Gecreëerd door:</th>
+                                            <th class="table-head" scope="row">Gecreëerd door:</th>
                                             <td>{{ $task->created_by }}</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">Upload:</th>
+                                            <th class="table-head" scope="row">Upload:</th>
                                             <td><a href="{{ $task->uploadPath }}">{{ $task->uploadPath }}</a></td>
                                         </tr>
                                     </tbody>
@@ -77,14 +81,16 @@
                                 </form>
                                 @endif                               
                             </p>
+                            <div class="add-button" style="margin-top: 20px;">
+                            {{-- button to confirm completion --}}
+                            <form method="POST" action="{{ route('task.confirmCompletion') }}">
+                                @csrf
+                                <input type="hidden" name="task_id" value="{{ $task->user_id }}">
+                                <button type="submit">Taak voltooid</button>
+                            </form>
+                        </div>
                         </div>
                     </div>
-                {{-- button to confirm completion --}}
-                <form method="POST" action="{{ route('task.confirmCompletion') }}">
-                    @csrf
-                    <input type="hidden" name="task_id" value="{{ $task->user_id }}">
-                    <button type="submit">Taak voltooid</button>
-                </form>
                 </div>
                 @endforeach
             </div>
