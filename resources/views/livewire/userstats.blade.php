@@ -1,4 +1,4 @@
-<div wire:poll.1s="updateStats" class="userstats" style="background-color: #2c3e50; padding-left: 20px; padding-right: 20px; border-radius: 10px; color: white; padding-bottom: 20px;">
+<div wire:poll.5s="updateStats" class="userstats" style="background-color: #2c3e50; padding-left: 20px; padding-right: 20px; border-radius: 10px; color: white; padding-bottom: 20px;">
     <span> {{ $xp }}/{{ $maxXp }} XP -
      Level {{ $level }} - 
      {{ $coins }} <i class="fa-solid fa-sack-dollar"></i>
