@@ -67,7 +67,7 @@
                             {{-- button to confirm completion --}}
                                 <form method="POST" action="{{ route('task.confirmCompletion') }}">
                                     @csrf
-                                    <input type="hidden" name="task_id" value="{{ $task->user_id }}">
+                                    <input type="hidden" name="task_id" value="{{ $task->task_id }}">
                                     <button type="submit" class="btn btn-outline-success mt-2">Taak voltooid</button>
                                 </form>
                         </div>
