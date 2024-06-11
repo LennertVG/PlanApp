@@ -42,23 +42,23 @@
                         <form method="POST" action="{{ route('task.store') }}">
                             @csrf
                             <div class="form-group">
-                                <label for="name">Task Name</label>
+                                <label for="name">Taak naam</label>
                                 <input id="name" name="name" class="form-control mb-2" type="text">
 
-                                <label for="description">Description</label>
+                                <label for="description">Beschrijving</label>
                                 <textarea id="description" name="description" class="form-control mb-2"></textarea>
 
                                 <label for="deadline">Deadline</label>
                                 <input id="deadline" name="deadline" class="form-control mb-2" type="date">
 
-                                <label for="course">Course</label>
+                                <label for="course">Vak</label>
                                 <select id="course" name="course" class="form-control mb-2">
                                     @foreach ($courses as $course)
                                         <option value="{{ $course['id'] }}">{{ $course['name'] }}</option>
                                     @endforeach
                                 </select>
 
-                                <label for="taskType">Task Type</label>
+                                <label for="taskType">Type taak</label>
                                 <select id="taskType" name="taskType" class="form-control mb-2">
                                     @foreach ($taskTypes as $taskType)
                                         <option value="{{ $taskType['id'] }}">{{ $taskType['name'] }}</option>
@@ -70,7 +70,7 @@
                                 <input type="hidden" name="created_at" value="{{ date('Y-m-d H:i:s') }}">
                                 <input type="hidden" name="createdBy" value="{{ auth()->user()->role_id }}">
 
-                                <button type="submit" class="btn btn-primary w-100">Add Task</button>
+                                <button type="submit" class="btn btn-primary w-100">Taak toevoegen</button>
                             </div>
                         </form>
                     </div>

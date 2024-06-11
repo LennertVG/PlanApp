@@ -44,7 +44,7 @@
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Taken
                             </a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="add-task">Toevoegen</a></li>
                                 <li><a class="dropdown-item" href="tasks-by-user">Taken</a></li>
                             </ul>
@@ -54,9 +54,9 @@
                                 <a class="nav-link dropdown-toggle" href="/account" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Account
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="/login">Login</a></li>
-                                    <li><a class="dropdown-item" href="/register">Register</a></li>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="/login">Inloggen</a></li>
+                                    <li><a class="dropdown-item" href="/register">Registreren</a></li>
                                 </ul>
                             </li>
                         @else
@@ -64,11 +64,11 @@
                                 <a class="nav-link dropdown-toggle" href="/account" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     {{ Auth::user()->firstname }}
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="/profile">Settings</a></li>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="/profile">Instellingen</a></li>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
-                                        <button class="dropdown-item" type="submit">Logout</button>
+                                        <button class="dropdown-item" type="submit">Uitloggen</button>
                                     </form>
                                 </ul>
                             </li>
