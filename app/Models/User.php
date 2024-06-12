@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Task;
+use App\Models\Course;
+use App\Models\Group;
 
 class User extends \TCG\Voyager\Models\User
 {
@@ -47,5 +49,15 @@ class User extends \TCG\Voyager\Models\User
     public function tasks()
     {
         return $this->belongsToMany(Task::class)->withPivot('uploadPath');
+    }
+
+    public function courses()
+    {
+        return $this->belongstoMany(Course::class);
+    }
+
+    public function groups()
+    {
+        return $this->belongstoMany(Group::class);
     }
 }
