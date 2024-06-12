@@ -60,4 +60,8 @@ class User extends \TCG\Voyager\Models\User
     {
         return $this->belongstoMany(Group::class);
     }
+    public function rewards()
+    {
+        return $this->belongstoMany(Reward::class)->withPivot('amount');
+    }
 }
