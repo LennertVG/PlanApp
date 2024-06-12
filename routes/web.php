@@ -35,27 +35,29 @@ Route::group(['prefix' => 'admin'], function () {
 
 
 Route::middleware('auth:sanctum')->group(function () { //Start routes requiring sanctum
-    
 
-// DASHBOARD VIEW
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
-// APP FUNCTIONALITY
-Route::get('/add-task', function () {
-    return view('add-task');
-})->name('add-task');
+    // DASHBOARD VIEW
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/tasks-by-user', [ViewComposerController::class, 'getTasksByUsersForTasks'])->name('tasks-by-user');
-Route::get('/', [ViewComposerController::class, 'getTasksByUsersForHome'])->name('home');
+    // APP FUNCTIONALITY
+    Route::get('/add-task', function () {
+        return view('add-task');
+    })->name('add-task');
 
-Route::post('storeTask', [TaskController::class, 'store'])->name('task.store');
+    Route::get('/tasks-by-user', [ViewComposerController::class, 'getTasksByUsersForTasks'])->name('tasks-by-user');
+    Route::get('/', [ViewComposerController::class, 'getTasksByUsersForHome'])->name('home');
 
-// route for completing a task
-Route::post('/complete-task', [TaskController::class, 'confirmCompletion'])->name('task.confirmCompletion');
+    Route::get('/teacher-tasks', [TaskController::class, 'getAllTasksOfStudentsByTeacherId'])->name('teacher-tasks');
 
-Route::post('/upload-task-file', [FileUploadController::class, 'uploadTaskFile']);
+    Route::post('storeTask', [TaskController::class, 'store'])->name('task.store');
+
+    // route for completing a task
+    Route::post('/complete-task', [TaskController::class, 'confirmCompletion'])->name('task.confirmCompletion');
+
+    Route::post('/upload-task-file', [FileUploadController::class, 'uploadTaskFile']);
 
 Route::get('/test-area', function () {
     return view('test-area');
