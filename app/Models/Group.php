@@ -4,28 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Task;
-use App\Models\Group;
+use App\Models\Course;
 use App\Models\User;
 
-class Course extends Model
+class Group extends Model
 {
-    
     use HasFactory;
 
-    public function tasks()
+    public function courses()
     {
-        return $this->hasMany(Task::class, 'course_id');
-    }
-
-    public function groups()
-    {
-        return $this->belongstoMany(Group::class);
+        return $this->belongstoMany(Course::class);
     }
 
     public function users()
     {
         return $this->belongstoMany(User::class);
     }
-
 }
