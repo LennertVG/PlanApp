@@ -57,6 +57,10 @@ Route::post('/complete-task', [TaskController::class, 'confirmCompletion'])->nam
 
 Route::post('/upload-task-file', [FileUploadController::class, 'uploadTaskFile']);
 
+Route::get('/test-area', function () {
+    return view('test-area');
+});
+
 }); //end routes requiring sanctum
 
 require __DIR__ . '/auth.php';
