@@ -58,6 +58,11 @@ Route::middleware('auth:sanctum')->group(function () { //Start routes requiring 
     Route::post('/complete-task', [TaskController::class, 'confirmCompletion'])->name('task.confirmCompletion');
 
     Route::post('/upload-task-file', [FileUploadController::class, 'uploadTaskFile']);
+
+Route::get('/test-area', function () {
+    return view('test-area');
+});
+
 }); //end routes requiring sanctum
 
 require __DIR__ . '/auth.php';
