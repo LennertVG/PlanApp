@@ -176,3 +176,7 @@ p {
 .table-head {
     width: 50px;
 }
+
+.klas-titel {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}

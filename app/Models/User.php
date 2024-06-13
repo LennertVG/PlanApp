@@ -42,4 +42,8 @@ class User extends VoyagerUser
     {
         return $this->belongsToMany(Group::class);
     }
+    public function rewards()
+    {
+        return $this->belongstoMany(Reward::class)->withPivot('amount');
+    }
 }
