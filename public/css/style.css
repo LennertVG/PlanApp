@@ -80,7 +80,7 @@ p {
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 60px;
+    padding-top: 50px;
     left: 0;
     top: 0;
     width: 100%;
@@ -98,7 +98,6 @@ p {
     border: 1px solid #888;
     width: 80%;
     max-width: 600px;
-    /* Limit the width of the modal */
     border-radius: 14px;
 }
 

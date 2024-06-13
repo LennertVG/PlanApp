@@ -55,6 +55,8 @@ Route::post('storeTask', [TaskController::class, 'store'])->name('task.store');
 // route for completing a task
 Route::post('/complete-task', [TaskController::class, 'confirmCompletion'])->name('task.confirmCompletion');
 
+Route::post('/task/{task}/mark-in-progress', [TaskController::class, 'markTaskInProgress'])->name('task.markInProgress');
+
 Route::post('/upload-task-file', [FileUploadController::class, 'uploadTaskFile']);
 
 }); //end routes requiring sanctum

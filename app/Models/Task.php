@@ -4,9 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-use App\Models\Course;
-use App\Models\TaskType;
 
 class Task extends Model
 {
@@ -14,8 +11,7 @@ class Task extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class)->withPivot('uploadPath');
-        
+        return $this->belongsToMany(User::class)->withPivot('uploadPath', 'completed');
     }
 
     public function course()
