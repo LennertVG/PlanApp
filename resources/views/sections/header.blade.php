@@ -25,9 +25,11 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg">
             <div class="container-fluid navbar-content">
-                <a class="navbar-brand" href="/">PlanApp</a>
+                <a class="navbar-brand" href="/">
+                    <img src={{asset('assets/logo.png')}} alt="Logo" class="d-inline-block align-text-top logo-navbar">
+                </a>
 
                 <div class="userstats-container">
                     @if(Auth::user())
