@@ -31,12 +31,12 @@
                     <img src={{asset('assets/logo.png')}} alt="Logo" class="d-inline-block align-text-top logo-navbar">
                 </a>
 
+                @if(Auth::check() && Auth::user()->role_id == 4)
                 <div class="userstats-container">
-                    @if(Auth::user())
                         @livewire('userstats')
-                    @endif
                 </div>
-
+                @endif
+                
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
