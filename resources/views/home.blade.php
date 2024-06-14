@@ -30,38 +30,71 @@
                         </div>
                     </div>
                     <div class="tasks-container-home">
-                        <div class="row row-cols-1 row-cols-md-3  custom-grid-tasks">
+                        <div class="row row-cols-1 row-cols-md-3 custom-grid-tasks">
                             {{-- Only returning tasks that have a deadline in the future, sorted by deadline ascending --}}
                             @foreach ($tasks->filter(function ($task) {
                                 return $task->deadline >= now();
                             })->sortBy('deadline') as $task)
-                            <div class="col">
-                                <div class="card task" data-course="{{ $task->course->name }}" data-tasktype="{{ $task->tasktype->name }}" data-name="{{ $task->name }}" data-deadline="{{ $task->deadline }}" data-description="{{ $task->description }}" data-createdby="{{ $task->created_by }}">
-                                    <div class="card-body">
-                                        <div class="card-content-container">
-                                            <div class="card-content-left">
-                                                <h3>{{ $task->course->name }}</h3>
-                                                <div class="card-text">
-                                                    <p>{{ $task->name }}</p>
-                                                    <p>{{ $task->formatted_deadline }}</p>
+                                <div class="col">
+                                    <div class="card task" data-course="{{ $task->course->name }}" data-tasktype="{{ $task->tasktype->name }}" data-name="{{ $task->name }}" data-deadline="{{ $task->deadline }}" data-description="{{ $task->description }}" data-createdby="{{ $task->created_by }}">
+                                        <div class="card-body">
+                                            <div class="card-content-container">
+                                                <div class="card-content-left">
+                                                    <h3>{{ $task->course->name }}</h3>
+                                                    <div class="card-text">
+                                                        <p>{{ $task->name }}</p>
+                                                        <p>{{ $task->formatted_deadline }}</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="card-content-right">
-                                                <div class="tasktype-emblem" style="background-color: 
-                                                    @if($task->tasktype_id == 1) 
-                                                        #ef3056; color: white;
-                                                    @elseif($task->tasktype_id == 2) 
-                                                        #ffe8a3
-                                                    @elseif($task->tasktype_id == 3) 
-                                                        #9ab87a
-                                                    @endif">
-                                                    {{ $task->tasktype->name }}
+                                                <div class="card-content-right">
+                                                    <div class="tasktype-emblem" style="background-color: 
+                                                        @if($task->tasktype_id == 1) 
+                                                            #ef3056; color: white;
+                                                        @elseif($task->tasktype_id == 2) 
+                                                            #ffe8a3
+                                                        @elseif($task->tasktype_id == 3) 
+                                                            #9ab87a
+                                                        @endif">
+                                                        {{ $task->tasktype->name }}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>     
+                                </div>
+                                <div id="taskModal" class="modal">
+                                    <div class="modal-content">
+                                        <span class="close">&times;</span>
+                                        <h2 id="modalCourse"></h2>
+                                        <p id="modalTaskType"></p>
+                                        <p id="modalTaskName"></p>
+                                        <p id="modalDeadline"></p>
+                                        <p id="modalDescription"></p>
+                                        <p id="modalCreatedBy"></p>
+
+                                        {{-- <form method="POST" action="/upload-task-file" enctype="multipart/form-data">
+                                            @csrf
+                                            <input type="hidden" name="task_id" value="{{ $task->id }}">
+                                            <input class="form-control form-control-sm mt-2" id="formFileSm" type="file" name="task_file">
+                                            @if ($errors->any())
+                                                <div class="alert alert-danger">
+                                                    <ul>
+                                                        @foreach ($errors->all() as $error)
+                                                            <li>{{ $error }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            @endif
+                                            <button id="turnInTaskButton" class="btn btn-success w-100 mt-2">Taak indienen</button>
+                                        </form> --}}
+
+                                        <form method="POST" action="{{ route('task.markInProgress', $task->task_id) }}">
+                                            @csrf
+                                            <input type="hidden" name="task_id" value="{{ $task->task_id }}">
+                                            <button type="submit" class="btn btn-primary w-100 mt-2">Taak indienen</button>
+                                        </form>
                                     </div>
-                                </div>     
-                            </div>
+                                </div>
                             @endforeach
                         </div>
                         <div id="taskForm" class="modal">
@@ -104,54 +137,42 @@
                             </div>
                         </div>
                     </div>
-                    </div>
-                    <div id="taskModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close">&times;</span>
-                            <h2 id="modalCourse"></h2>
-                            <p id="modalTaskType"></p>
-                            <p id="modalTaskName"></p>
-                            <p id="modalDeadline"></p>
-                            <p id="modalDescription"></p>
-                            <p id="modalCreatedBy"></p>
-                        </div>
-                    </div>
                 </div>
             </div>  
         </div>  
-            <script>
-                function generateCalendar() {
-                    const today = new Date();
-                    const currentMonth = today.getMonth();
-                    const currentYear = today.getFullYear();
-                    const currentDate = today.getDate();
+        <script>
+            function generateCalendar() {
+                const today = new Date();
+                const currentMonth = today.getMonth();
+                const currentYear = today.getFullYear();
+                const currentDate = today.getDate();
 
-                    const monthYear = document.getElementById('monthYear');
-                    monthYear.innerText = today.toLocaleString('default', { month: 'long' }) + ' ' + currentYear;
+                const monthYear = document.getElementById('monthYear');
+                monthYear.innerText = today.toLocaleString('default', { month: 'long' }) + ' ' + currentYear;
 
-                    const daysContainer = document.getElementById('days');
-                    daysContainer.innerHTML = '';
+                const daysContainer = document.getElementById('days');
+                daysContainer.innerHTML = '';
 
-                    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
-                    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+                const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+                const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
-                    // Add empty divs for days of the previous month
-                    for (let i = 0; i < firstDay; i++) {
-                        daysContainer.appendChild(document.createElement('div'));
-                    }
-
-                    // Add divs for each day of the current month
-                    for (let day = 1; day <= daysInMonth; day++) {
-                        const dayDiv = document.createElement('div');
-                        dayDiv.innerText = day;
-                        dayDiv.classList.add('day');
-                        if (day === currentDate) {
-                            dayDiv.classList.add('today');
-                        }
-                        daysContainer.appendChild(dayDiv);
-                    }
+                // Add empty divs for days of the previous month
+                for (let i = 0; i < firstDay; i++) {
+                    daysContainer.appendChild(document.createElement('div'));
                 }
-                generateCalendar();
-            </script>
+
+                // Add divs for each day of the current month
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dayDiv = document.createElement('div');
+                    dayDiv.innerText = day;
+                    dayDiv.classList.add('day');
+                    if (day === currentDate) {
+                        dayDiv.classList.add('today');
+                    }
+                    daysContainer.appendChild(dayDiv);
+                }
+            }
+            generateCalendar();
+        </script>
     @endif
 @endsection
