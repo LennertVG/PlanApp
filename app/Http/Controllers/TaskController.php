@@ -146,7 +146,8 @@ class TaskController extends Controller
     public function getAllTasksOfStudentsByTeacherId()
     {
         if (Auth::check()) {
-            $teacherId = 9; // Replace with the actual teacher ID you want to test with
+
+            $teacherId = Auth::user()->id; // Replace with the actual teacher ID you want to test with
             $studentsByGroupByCourse = \App\Models\User::whereHas('courses', function ($courseQuery) use ($teacherId) {
                 $courseQuery->where('user_id', $teacherId); // Adjust this column name as needed
             })->with([
@@ -155,10 +156,7 @@ class TaskController extends Controller
                         'groups' => function ($groupQuery) {
                             $groupQuery->with([
                                 'users' => function ($userQuery) {
-                                    $userQuery->with([
-                                        // Optionally, add additional conditions to tasks here
-                                        // For example, you might filter tasks based on specific criteria
-                                    ]);
+                                    $userQuery->with([]);
                                 }
                             ]);
                         }

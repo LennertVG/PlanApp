@@ -8,7 +8,9 @@
                     {{-- dd($studentsByGroupByCourse); --}}
                 ?>
                 @foreach ($studentsByGroupByCourse as $teacher)
-                    <h2>Welkom, professor {{ $teacher->name }}</h2>
+                    <div class="titlecontainer-tasks-teacher">
+                        <h2>Welkom, professor {{ $teacher->name }}</h2>
+                    </div>
                     <div class="accordion" id="accordion-teacher-{{ $teacher->id }}">
                         @foreach ($teacher->courses as $courseIndex => $course)
                             <div class="accordion-item">
@@ -30,7 +32,27 @@
                                                     <div id="collapse-group-{{ $course->id }}-{{ $groupIndex }}" class="accordion-collapse collapse" aria-labelledby="heading-group-{{ $course->id }}-{{ $groupIndex }}" data-bs-parent="#accordion-course-{{ $course->id }}">
                                                         <div class="accordion-body">
                                                             @foreach ($group->users as $student)
-                                                                <p>{{ $student->firstname }} {{ $student->lastname }}</p>
+                                                                <p>{{ $student->firstname }} {{ $student->name }}</p>
+                                                                <?php
+                                                                    $studentWithTasks = \App\Models\User::with(['tasks' => function ($query) use ($course) {
+                                                                        $query->where('course_id', $course->id);
+                                                                    }])->find($student->id);
+
+                                                                    $tasks = $studentWithTasks->tasks->map(function ($task) {
+                                                                        $task->formatted_deadline = \Carbon\Carbon::parse($task->deadline)->format('d-m-Y');
+                                                                        return $task;
+                                                                    });
+                                                                ?>
+                                                                <ul>
+                                                                    @foreach ($tasks as $task)
+                                                                        <li>
+                                                                            {{ $task->name }} - Deadline: {{ $task->formatted_deadline }}
+                                                                            @if($task->pivot->uploadPath)
+                                                                                - Uploaded File: <a href="{{ asset('storage/' . $task->pivot->uploadPath) }}">Download</a>
+                                                                            @endif
+                                                                        </li>
+                                                                    @endforeach
+                                                                </ul>
                                                             @endforeach
                                                         </div>
                                                     </div>
