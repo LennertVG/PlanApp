@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use App\Models\Course;
 use App\Models\TaskType;
+use Illuminate\Support\Facades\DB;
 
 class TaskController extends Controller
 {
@@ -58,6 +59,25 @@ class TaskController extends Controller
         }
     }
 
+    public function markTaskInProgress(Request $request)
+    {
+        $task = Task::find($request->task_id);
+        $user = Auth::user();
+
+        if (!$task) {
+            Log::error('Task not found for task_id: ' . $request->id);
+            return redirect('/')->with('error', 'Task not found.');
+        }
+
+        // Update the pivot record
+        $task->users()->updateExistingPivot($user->id, ['completed' => 1, 'submitted_at' => now()]);
+
+        $submittedAt = Carbon::parse($task->users()->first()->pivot->submitted_at);
+        $deadline = Carbon::parse($task->deadline);
+        $createdAt = Carbon::parse($task->created_at);
+
+        return back();
+    }
 
     public function confirmCompletion(Request $request)
     {
@@ -85,7 +105,7 @@ class TaskController extends Controller
         }
 
         // Update the pivot table to mark the task as completed
-        $task->users()->updateExistingPivot($user->id, ['completed' => 1]);
+        $task->users()->updateExistingPivot($user->id, ['completed' => 2]);
 
         $submittedAt = Carbon::parse($pivotRecord->pivot->submitted_at);
         $deadline = Carbon::parse($task->deadline);

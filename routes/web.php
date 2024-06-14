@@ -52,6 +52,10 @@ Route::middleware('auth:sanctum')->group(function () { //Start routes requiring 
 
     Route::get('/teacher-tasks', [TaskController::class, 'getAllTasksOfStudentsByTeacherId'])->name('teacher-tasks');
 
+    Route::post('/task/{task}/mark-in-progress', [TaskController::class, 'markTaskInProgress'])->name('task.markInProgress');
+
+    Route::post('/upload-task-file', [FileUploadController::class, 'uploadTaskFile']);
+
     Route::post('storeTask', [TaskController::class, 'store'])->name('task.store');
 
     // route for completing a task
