@@ -34,8 +34,7 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 
-Route::middleware('auth:sanctum')->group(function () { //Start routes requiring sanctum
-
+Route::middleware('auth:sanctum')->group(function () {
 
     // DASHBOARD VIEW
     Route::get('/dashboard', function () {
@@ -43,30 +42,35 @@ Route::middleware('auth:sanctum')->group(function () { //Start routes requiring 
     })->middleware(['auth', 'verified'])->name('dashboard');
 
     // APP FUNCTIONALITY
+    // route for adding a task
     Route::get('/add-task', function () {
         return view('add-task');
     })->name('add-task');
 
+    // retreiving tasks but returning in a different view
     Route::get('/tasks-by-user', [ViewComposerController::class, 'getTasksByUsersForTasks'])->name('tasks-by-user');
     Route::get('/', [ViewComposerController::class, 'getTasksByUsersForHome'])->name('home');
 
+    // retreiving tasks for teacher
     Route::get('/teacher-tasks', [TaskController::class, 'getAllTasksOfStudentsByTeacherId'])->name('teacher-tasks');
 
+    // route for marking a task as in progress
     Route::post('/task/{task}/mark-in-progress', [TaskController::class, 'markTaskInProgress'])->name('task.markInProgress');
 
-    Route::post('/upload-task-file', [FileUploadController::class, 'uploadTaskFile']);
-
+    // route for storing a task
     Route::post('storeTask', [TaskController::class, 'store'])->name('task.store');
 
     // route for completing a task
     Route::post('/complete-task', [TaskController::class, 'confirmCompletion'])->name('task.confirmCompletion');
 
+    // route for uploading a file
     Route::post('/upload-task-file', [FileUploadController::class, 'uploadTaskFile']);
 
-Route::get('/test-area', function () {
-    return view('test-area');
+    Route::get('/test-area', function () {
+        return view('test-area');
+    });
 });
 
-}); //end routes requiring sanctum
+
 
 require __DIR__ . '/auth.php';
