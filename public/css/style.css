@@ -281,6 +281,10 @@ p {
     align-items: flex-start;
 }
 
+.salute-home-addtask {
+    margin-left: 1rem;
+}
+
 .card-content-container {
     display: flex;
     flex-direction: row;
