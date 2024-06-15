@@ -149,8 +149,7 @@ class TaskController extends Controller
     {
         if (Auth::check()) {
 
-            // $teacherId = Auth::user()->id; 
-            $teacherId = 9;
+            $teacherId = Auth::user()->id; 
             $studentsByGroupByCourse = \App\Models\User::whereHas('courses', function ($courseQuery) use ($teacherId) {
                 $courseQuery->where('user_id', $teacherId); // Adjust this column name as needed
             })->with([
