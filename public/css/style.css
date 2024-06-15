@@ -322,3 +322,14 @@ p {
 .accordion-button:focus {
     box-shadow: none;
 }
+
+.custom-reward-btn {
+    background-color: #4C4876;
+    border-color: #4C4876;
+    color: white;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    margin-left: 10px;
+    display: inline-block;
+}

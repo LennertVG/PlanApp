@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ViewComposerController;
 use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\RewardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,11 @@ Route::middleware('auth:sanctum')->group(function () {
     // retreiving tasks for teacher
     Route::get('/teacher-tasks', [TaskController::class, 'getAllTasksOfStudentsByTeacherId'])->name('teacher-tasks');
 
+    // route displaying your student's rewards
+    Route::get('/teacher-rewards', function() {
+        return view('teacher-rewards');
+    })->name('teacher-rewards');
+
     // route for marking a task as in progress
     Route::post('/task/{task}/mark-in-progress', [TaskController::class, 'markTaskInProgress'])->name('task.markInProgress');
 
@@ -65,6 +71,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // route for uploading a file
     Route::post('/upload-task-file', [FileUploadController::class, 'uploadTaskFile']);
+
+    // route for using a reward
+    Route::post('/use-reward', [RewardController::class, 'useReward'])->name('task.useReward');
 
     Route::get('/test-area', function () {
         return view('test-area');
