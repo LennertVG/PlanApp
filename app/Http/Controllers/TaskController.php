@@ -82,7 +82,7 @@ class TaskController extends Controller
     public function confirmCompletion(Request $request)
     {
         $task = Task::find($request->task_id);
-        $user = Auth::user();
+        $user = User::find($request->student_id);
         // Get the pivot record for the task and the authenticated user
         $pivotRecord = $task->users()->where('user_id', $user->id)->first();
 
@@ -140,14 +140,17 @@ class TaskController extends Controller
 
         $user->save();
 
-        return redirect('/tasks-by-user')->with('success', 'Task completed successfully.');
+        session()->flash('success', 'Taak gemarkeerd als voltooid');
+
+        return back();
     }
 
     public function getAllTasksOfStudentsByTeacherId()
     {
         if (Auth::check()) {
 
-            $teacherId = Auth::user()->id; // Replace with the actual teacher ID you want to test with
+            // $teacherId = Auth::user()->id; 
+            $teacherId = 9;
             $studentsByGroupByCourse = \App\Models\User::whereHas('courses', function ($courseQuery) use ($teacherId) {
                 $courseQuery->where('user_id', $teacherId); // Adjust this column name as needed
             })->with([

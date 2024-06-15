@@ -11,6 +11,12 @@
                     <div class="titlecontainer-tasks-teacher">
                         <h2>Welkom, professor {{ $teacher->name }}</h2>
                     </div>
+                    {{-- Display session success message --}}
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     <div class="accordion" id="accordion-teacher-{{ $teacher->id }}">
                         @foreach ($teacher->courses as $courseIndex => $course)
                             <div class="accordion-item">
@@ -45,10 +51,21 @@
                                                                 ?>
                                                                 <ul>
                                                                     @foreach ($tasks as $task)
-                                                                        <li>
+                                                                        <li class="mb-2">
+                                                                            @if($task->pivot->completed == 2) <span class="badge bg-success">Compleet</span> @endif
+                                                                            @if($task->pivot->completed == 1) <span class="badge bg-secondary">Nog te evalueren</span> @endif
+                                                                            @if($task->pivot->completed == 0) <span class="badge bg-danger">Nog niet gestart</span> @endif
                                                                             {{ $task->name }} - Deadline: {{ $task->formatted_deadline }}
                                                                             @if($task->pivot->uploadPath)
                                                                                 - Uploaded File: <a href="{{ asset('storage/' . $task->pivot->uploadPath) }}">Download</a>
+                                                                            @endif
+                                                                            @if($task->pivot->completed == 1)
+                                                                            <form method="POST" action="/complete-task" enctype="multipart/form-data" style="display:inline;">
+                                                                                @csrf
+                                                                                <input type="hidden" name="task_id" value="{{ $task->id }}">
+                                                                                <input type="hidden" name="student_id" value="{{ $student->id }}"> 
+                                                                                <button type="submit" class="btn btn-secondary btn-sm">Mark as done</button>
+                                                                            </form>
                                                                             @endif
                                                                         </li>
                                                                     @endforeach
