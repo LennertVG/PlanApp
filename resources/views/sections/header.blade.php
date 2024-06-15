@@ -42,6 +42,18 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav ms-auto">
+                        @if(Auth::check() && Auth::user()->role_id == 3)
+                            <li class="nav-item dropdown" style="display: flex; align-items: center;">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Klasmanagement
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="teacher-rewards">Rewards innen</a></li>
+                                    <li><a class="dropdown-item" href="teacher-tasks">Taken beoordelen</a></li>
+                                </ul>
+                            </li>
+                        @endif
+
                         <li class="nav-item dropdown" style="display: flex; align-items: center;">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Taken
