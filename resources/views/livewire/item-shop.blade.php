@@ -9,6 +9,7 @@
                     <div class="col-md-4 mb-4">
                         <div class="card h-100">
                             <div class="card-body">
+                                <i class="fa-solid fa-{{ $reward->iconPath }}"></i>
                                 <h5 class="card-title">{{ $reward->name }}</h5>
                                 <p class="card-text">{{ $reward->pivot->amount }} / {{ $reward->maxAmount }}</p>
                             </div>

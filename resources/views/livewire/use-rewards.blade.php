@@ -62,7 +62,7 @@
                                                                                                 <input type="hidden" name="student_id" value="{{ $student->id }}">
                                                                                                 <button class="btn custom-reward-btn mr-2" type="submit">Gebruik reward</button>
                                                                                             </form>
-                                                                                            {{ $reward->name }} : {{ $reward->pivot->amount }}
+                                                                                            <i class="fa-solid fa-{{ $reward->iconPath }}"></i> - {{ $reward->name }} : {{ $reward->pivot->amount }}
                                                                                         </li>
                                                                                     @endif
 
