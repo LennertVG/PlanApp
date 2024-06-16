@@ -17,6 +17,7 @@ class User extends VoyagerUser
         'name',
         'email',
         'password',
+        'role_id',
     ];
 
     protected $hidden = [
