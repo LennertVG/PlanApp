@@ -75,8 +75,8 @@ Route::middleware('auth:sanctum')->group(function () {
     // route for using a reward
     Route::post('/use-reward', [RewardController::class, 'useReward'])->name('task.useReward');
 
-    Route::get('/test-area', function () {
-        return view('test-area');
+    Route::get('/item-shop', function () {
+        return view('item-shop');
     });
 });
 
