@@ -9,7 +9,12 @@
                 ?>
                 @foreach ($studentsByGroupByCourse as $teacher)
                     <div class="titlecontainer-tasks-teacher">
-                        <h2>Welkom, professor {{ $teacher->name }}</h2>
+                        <div class="titlecontainer-teacher-left">
+                            Welkom, professor {{$teacher->name}}
+                        </div>
+                        <div class="titlecontainer-teacher-right">
+                            TAKEN BEOORDELEN
+                        </div>
                     </div>
                     {{-- Display session success message --}}
                     @if(session('success'))
