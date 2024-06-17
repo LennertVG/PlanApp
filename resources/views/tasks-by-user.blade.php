@@ -10,11 +10,11 @@
             <div class="row row-cols-1 row-cols-md-3 g-4 custom-grid-tasks">
                 @foreach ($tasks as $task)
                 <div class="col">
-                    <div class="card">
+                    <div class="card" style="height: 100%">
                         <div class="card-body">
                             <h3 class="card-title">{{ $task->tasktype->name}}</h3>
                             <p class="card-text">
-                                <table class="table task-cards">
+                                <table class="table task-cards" style="height: auto">
                                     <tbody>
                                         <tr>
                                             <th class="table-head" scope="row">Naam</th>
@@ -37,19 +37,15 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th class="table-head" scope="row">Gecreëerd door</th>
-                                            <td>{{ $task->created_by }}</td>
-                                        </tr>
-                                        <tr>
                                             <th class="table-head" scope="row">Upload</th>
-                                            <td><a href="{{ $task->uploadPath }}">{{ $task->uploadPath }}</a></td>
+                                            <td>@if($task->uploadPath)<a href="{{ $task->uploadPath }}" target="_blank">Open File</a>@endif</td>
                                         </tr>
                                     </tbody>
                                 </table>
                                 @if ($task->uploadPath == 'NULL' || $task->uploadPath == NULL || !$task->uploadPath)
                                 <form method="POST" action="/upload-task-file" enctype="multipart/form-data">
                                     @csrf
-                                    <input type="hidden" name="task_id" value="{{ $task->id }}">
+                                    <input type="hidden" name="task_id" value="{{ $task->task_id }}">
                                     <input class="form-control form-control-sm" id="formFileSm" type="file" name="task_file">
                                     <button type="submit" class="btn btn-secondary btn-sm mt-2">Upload File</button>                         
                                         @if ($errors->any())
@@ -64,12 +60,6 @@
                                 </form>
                                 @endif                               
                             </p>
-                            {{-- button to confirm completion --}}
-                                <form method="POST" action="{{ route('task.confirmCompletion') }}">
-                                    @csrf
-                                    <input type="hidden" name="task_id" value="{{ $task->task_id }}">
-                                    <button type="submit" class="btn btn-outline-success mt-2">Taak voltooid</button>
-                                </form>
                         </div>
                     </div>
                 </div>

@@ -24,7 +24,7 @@ class FileUploadController extends Controller
 
         $path = $request->file('task_file')->store('uploads', 'public');
 
-        $task->users()->updateExistingPivot($user->id, ['uploadPath' => $path]);
+        $task->users()->updateExistingPivot($user->id, ['uploadPath' => '/storage/' .$path]);
 
         return redirect()->back()->with('success', 'Task file uploaded successfully!');
     }
