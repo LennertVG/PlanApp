@@ -24,9 +24,16 @@
                             <div class="salute-home-title">
                                 <h2>Hallo, {{ Auth::user()->firstname }}!</h2>
                             </div>
+                            @if (Auth::user()->role_id == 4)
                             <div class="salute-home-sentence">
                                 <p>Doe zo verder!</p>
                             </div>
+                            @endif
+                            @if (Auth::user()->role_id == 3)
+                            <div class="salute-home-sentence">
+                                <p>Lesgeven is een roeping!</p>
+                            </div>
+                            @endif
                         </div>
                         <div class="salute-home-addtask">
                             <button id="addTaskButton" class="btn btn-success mb-2">Taak toevoegen</button>

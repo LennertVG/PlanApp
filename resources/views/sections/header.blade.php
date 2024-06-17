@@ -53,16 +53,26 @@
                                 </ul>
                             </li>
                         @endif
-
+                        
+                        @if(Auth::check() && Auth::user()->role_id == 4)
                         <li class="nav-item dropdown" style="display: flex; align-items: center;">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Taken
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="add-task">Toevoegen</a></li>
-                                <li><a class="dropdown-item" href="tasks-by-user">Taken</a></li>
+                                <li><a class="dropdown-item" href="tasks-by-user">Taken van {{ Auth::user()->firstname }}</a></li>
                             </ul>
                         </li>
+
+                        <li class="nav-item dropdown" style="display: flex; align-items: center;">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Beloningen
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="item-shop">Rewards kopen</a></li>
+                            </ul>
+                        </li>
+                        @endif
                         @if(Auth::guest())
                             <li class="nav-item dropdown" style="display: flex; align-items: center;">
                                 <a class="nav-link dropdown-toggle" href="/account" role="button" data-bs-toggle="dropdown" aria-expanded="false">
