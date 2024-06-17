@@ -46,7 +46,14 @@
                                 return $task->deadline >= now();
                             })->sortBy('deadline') as $task)
                                 <div class="col">
-                                    <div class="card task" data-course="{{ $task->course->name }}" data-tasktype="{{ $task->tasktype->name }}" data-name="{{ $task->name }}" data-deadline="{{ $task->deadline }}" data-description="{{ $task->description }}" data-createdby="{{ $task->created_by }}">
+                                    <div class="card task" 
+                                         data-course="{{ $task->course->name }}" 
+                                         data-tasktype="{{ $task->tasktype->name }}" 
+                                         data-name="{{ $task->name }}" 
+                                         data-deadline="{{ $task->deadline }}" 
+                                         data-description="{{ $task->description }}" 
+                                         data-createdby="{{ $task->created_by }}"
+                                         data-taskid="{{ $task->task_id }}">
                                         <div class="card-body"> 
                                             <div class="task-card-outer">
                                                 <div class="task-card-left">
@@ -79,40 +86,24 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="taskModal" class="modal">
-                                    <div class="modal-content">
-                                        <span class="close">&times;</span>
-                                        <h2 id="modalCourse"></h2>
-                                        <p id="modalTaskType"></p>
-                                        <p id="modalTaskName"></p>
-                                        <p id="modalDeadline"></p>
-                                        <p id="modalDescription"></p>
-                                        <p id="modalCreatedBy"></p>
-
-                                        {{-- <form method="POST" action="/upload-task-file" enctype="multipart/form-data">
-                                            @csrf
-                                            <input type="hidden" name="task_id" value="{{ $task->id }}">
-                                            <input class="form-control form-control-sm mt-2" id="formFileSm" type="file" name="task_file">
-                                            @if ($errors->any())
-                                                <div class="alert alert-danger">
-                                                    <ul>
-                                                        @foreach ($errors->all() as $error)
-                                                            <li>{{ $error }}</li>
-                                                        @endforeach
-                                                    </ul>
-                                                </div>
-                                            @endif
-                                            <button id="turnInTaskButton" class="btn btn-success w-100 mt-2">Taak indienen</button>
-                                        </form> --}}
-
-                                        <form method="POST" action="{{ route('task.markInProgress', $task->task_id) }}">
-                                            @csrf
-                                            <input type="hidden" name="task_id" value="{{ $task->task_id }}">
-                                            <button type="submit" class="custom-reward-btn-home">Taak indienen</button>
-                                        </form>
-                                    </div>
-                                </div>
                             @endforeach
+                        </div>
+                        <div id="taskModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <h2 id="modalCourse"></h2>
+                                <p id="modalTaskType"></p>
+                                <p id="modalTaskName"></p>
+                                <p id="modalDeadline"></p>
+                                <p id="modalDescription"></p>
+                                <p id="modalCreatedBy"></p>
+
+                                <form method="POST" action="/task/mark-in-progress/{task}">
+                                    @csrf
+                                    <input type="hidden" name="task_id" id="hiddenTaskId" value="task_id">
+                                    <button type="submit" class="custom-reward-btn-home">Taak indienen</button>
+                                </form>
+                            </div>
                         </div>
                         <div id="taskForm" class="modal">
                             <div class="modal-content">

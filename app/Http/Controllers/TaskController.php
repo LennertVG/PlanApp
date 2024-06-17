@@ -61,20 +61,41 @@ class TaskController extends Controller
 
     public function markTaskInProgress(Request $request)
     {
-        $task = Task::find($request->task_id);
+
+        $task = Task::find($request->task_id); // Use task_id here
         $user = Auth::user();
 
         if (!$task) {
-            Log::error('Task not found for task_id: ' . $request->id);
+            Log::error('Task not found for task_id: ' . $request->task_id);
             return redirect('/')->with('error', 'Task not found.');
         }
 
         // Update the pivot record
-        $task->users()->updateExistingPivot($user->id, ['completed' => 1, 'submitted_at' => now()]);
+        // $task->users()->updateExistingPivot($user->id, ['completed' => 1, 'submitted_at' => now()]);
 
-        $submittedAt = Carbon::parse($task->users()->first()->pivot->submitted_at);
-        $deadline = Carbon::parse($task->deadline);
-        $createdAt = Carbon::parse($task->created_at);
+        // Carbon::parse($task->users()->first()->pivot->submitted_at);
+        // Carbon::parse($task->deadline);
+        // Carbon::parse($task->created_at);
+
+        // RETREIVAL OF EMAIL OF TEACHER FROM COURSE
+        // Retrieve the course associated with the task
+        $course = $task->course->name;
+        // dd($course);
+
+        if (!$course) {
+            Log::error('Course not found for task_id: ' . $request->task_id);
+            return redirect('/')->with('error', 'Course not found.');
+        }
+        // Retrieve the teacher associated with the course
+        $teacher = $course->users()->first();
+
+        if (!$teacher) {
+            Log::error('Teacher not found for course_id: ' . $course->id);
+            return redirect('/')->with('error', 'Teacher not found.');
+        }
+
+        // Debug dump the teacher
+        dd($teacher);
 
         return back();
     }
@@ -149,7 +170,7 @@ class TaskController extends Controller
     {
         if (Auth::check()) {
 
-            $teacherId = Auth::user()->id; 
+            $teacherId = Auth::user()->id;
             $studentsByGroupByCourse = \App\Models\User::whereHas('courses', function ($courseQuery) use ($teacherId) {
                 $courseQuery->where('user_id', $teacherId); // Adjust this column name as needed
             })->with([
@@ -166,8 +187,38 @@ class TaskController extends Controller
                 }
             ])->get();
             return view('teacher-group', compact('studentsByGroupByCourse'));
-            // return $tasksByStudentByGroupByCourse;
-            // dd($tasksByStudentByGroupByCourse);
         }
+    }
+
+    public function getTeacherEmailByTask($taskId)
+    {
+        if (Auth::check()) {
+            // Retrieve the task
+            $task = Task::find($taskId);
+
+            if (!$task) {
+                return response()->json(['error' => 'Task not found'], 404);
+            }
+
+            // Retrieve the course associated with the task
+            $course = $task->course;
+
+            if (!$course) {
+                return response()->json(['error' => 'Course not found for the task'], 404);
+            }
+
+            // Retrieve the teacher associated with the course
+            // Assuming the teacher is the first user found in the course_user pivot table
+            $teacher = $course->users()->first();
+
+            if (!$teacher) {
+                return response()->json(['error' => 'Teacher not found for the course'], 404);
+            }
+
+            // Return the teacher's email
+            return response()->json(['teacher_email' => $teacher->email], 200);
+        }
+
+        return response()->json(['error' => 'Unauthorized'], 401);
     }
 }

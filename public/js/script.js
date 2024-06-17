@@ -24,12 +24,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
     tasks.forEach(task => {
         task.addEventListener('click', (event) => {
             event.stopPropagation();
+            const taskId = task.dataset.taskid;
+            console.log('Clicked task dataset:', task.dataset);
             document.getElementById("modalCourse").innerText = task.dataset.course;
             document.getElementById("modalTaskType").innerText = task.dataset.tasktype;
             document.getElementById("modalTaskName").innerText = task.dataset.name;
             document.getElementById("modalDeadline").innerText = task.dataset.deadline;
             document.getElementById("modalDescription").innerText = task.dataset.description;
             document.getElementById("modalCreatedBy").innerText = "Created by: " + task.dataset.createdby;
+
+            const form = document.querySelector("#taskModal form");
+            form.action = `/task/mark-in-progress/${taskId}`;
+            document.getElementById("hiddenTaskId").value = taskId;
+
             showModal(modal);
         });
     });
