@@ -61,7 +61,6 @@ class TaskController extends Controller
 
     public function markTaskInProgress(Request $request)
     {
-
         $task = Task::find($request->task_id); // Use task_id here
         $user = Auth::user();
 
@@ -79,15 +78,15 @@ class TaskController extends Controller
 
         // RETREIVAL OF EMAIL OF TEACHER FROM COURSE
         // Retrieve the course associated with the task
-        $course = $task->course->name;
-        // dd($course);
+        $course = $task->course; // Get the Course object instead of the name
 
         if (!$course) {
             Log::error('Course not found for task_id: ' . $request->task_id);
             return redirect('/')->with('error', 'Course not found.');
         }
+
         // Retrieve the teacher associated with the course
-        $teacher = $course->users()->first();
+        $teacher = $course->users()->first(); // Assuming the users relationship exists and includes teachers
 
         if (!$teacher) {
             Log::error('Teacher not found for course_id: ' . $course->id);
