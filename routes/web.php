@@ -56,12 +56,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/teacher-tasks', [TaskController::class, 'getAllTasksOfStudentsByTeacherId'])->name('teacher-tasks');
 
     // route displaying your student's rewards
-    Route::get('/teacher-rewards', function() {
+    Route::get('/teacher-rewards', function () {
         return view('teacher-rewards');
     })->name('teacher-rewards');
 
     // route for marking a task as in progress
-    Route::post('/task/{task}/mark-in-progress', [TaskController::class, 'markTaskInProgress'])->name('task.markInProgress');
+    Route::post('/task/mark-in-progress/{task}', [TaskController::class, 'markTaskInProgress']);
 
     // route for storing a task
     Route::post('storeTask', [TaskController::class, 'store'])->name('task.store');
