@@ -101,7 +101,6 @@ p {
     align-items: center;
     justify-content: center;
     border-radius: 14px;
-    padding: 10px;
     margin-bottom: 10px;
     cursor: pointer;
     background-color: white;
@@ -110,10 +109,9 @@ p {
 }
 
 .tasktype-emblem {
-    border-radius: 14px;
-    padding: 5px;
-    margin-bottom: 10px;
-    width: 4rem;
+    border-radius: 0.4rem;
+    padding: 0.3rem;
+    width: 3rem;
     text-align: center;
     font-family: 'Source Sans 3', sans-serif;
 }
@@ -301,6 +299,11 @@ p {
     border-style: none;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    --bs-card-spacer-y: none;
+    --bs-card-spacer-x: none;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-right: 1rem;
 }
 
 .card:hover {
@@ -366,4 +369,27 @@ p {
 
 .planny-container-home {
     margin-top: 1rem;
+}
+
+.task-card-outer {
+    display: flex;
+    flex-direction: row;
+}
+
+.task-card-left {
+    width: 25%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.task-card-right {
+    width: 75%;
+}
+
+.task-card-icon {
+    width: 2.5rem;
 }
