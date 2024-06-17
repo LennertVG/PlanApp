@@ -40,30 +40,37 @@
                             })->sortBy('deadline') as $task)
                                 <div class="col">
                                     <div class="card task" data-course="{{ $task->course->name }}" data-tasktype="{{ $task->tasktype->name }}" data-name="{{ $task->name }}" data-deadline="{{ $task->deadline }}" data-description="{{ $task->description }}" data-createdby="{{ $task->created_by }}">
-                                        <div class="card-body">
-                                            <div class="card-content-container">
-                                                <div class="card-content-left">
-                                                    <h3>{{ $task->course->name }}</h3>
-                                                    <div class="card-text">
-                                                        <p>{{ $task->name }}</p>
-                                                        <p>{{ $task->formatted_deadline }}</p>
-                                                    </div>
+                                        <div class="card-body"> 
+                                            <div class="task-card-outer">
+                                                <div class="task-card-left">
+                                                    <img class="task-card-icon" src="{{ asset('assets/icons/'.$task->course->iconPath) }}" alt="Planny"/>
                                                 </div>
-                                                <div class="card-content-right">
-                                                    <div class="tasktype-emblem" style="background-color: 
-                                                        @if($task->tasktype_id == 1) 
-                                                            #ef3056; color: white;
-                                                        @elseif($task->tasktype_id == 2) 
-                                                            #ffe8a3
-                                                        @elseif($task->tasktype_id == 3) 
-                                                            #9ab87a
-                                                        @endif">
-                                                        {{ $task->tasktype->name }}
+                                                <div class="task-card-right">
+                                                    <div class="card-content-container">
+                                                        <div class="card-content-left">
+                                                            <h3>{{ $task->course->name }}</h3>
+                                                            <div class="card-text">
+                                                                <p>{{ $task->name }}</p>
+                                                                <p>{{ $task->formatted_deadline }}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-content-right">
+                                                            <div class="tasktype-emblem" style="background-color: 
+                                                                @if($task->tasktype_id == 1) 
+                                                                    #ef3056; color: white;
+                                                                @elseif($task->tasktype_id == 2) 
+                                                                    #ffe8a3
+                                                                @elseif($task->tasktype_id == 3) 
+                                                                    #9ab87a
+                                                                @endif">
+                                                                {{ $task->tasktype->name }}
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>     
+                                    </div>
                                 </div>
                                 <div id="taskModal" class="modal">
                                     <div class="modal-content">
