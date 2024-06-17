@@ -62,7 +62,7 @@
                                                                             @if($task->pivot->completed == 0) <span class="badge bg-danger">Nog niet gestart</span> @endif
                                                                             {{ $task->name }} - Deadline: {{ $task->formatted_deadline }}
                                                                             @if($task->pivot->uploadPath)
-                                                                                - Uploaded File: <a href="{{ asset('storage/' . $task->pivot->uploadPath) }}">Download</a>
+                                                                                - Uploaded File: <a href="{{ asset($task->pivot->uploadPath) }}" target="_blank">Download</a>
                                                                             @endif
                                                                             @if($task->pivot->completed == 1)
                                                                             <form method="POST" action="/complete-task" enctype="multipart/form-data" style="display:inline;">
