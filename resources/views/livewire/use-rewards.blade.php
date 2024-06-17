@@ -12,8 +12,14 @@
                 @endif
 
                 @foreach ($studentsByGroupByCourse as $teacher)
+
                     <div class="titlecontainer-tasks-teacher">
-                        <h2>Welkom, professor {{ $teacher->name }}</h2>
+                        <div class="titlecontainer-teacher-left">
+                            Welkom, professor {{$teacher->name}}
+                        </div>
+                        <div class="titlecontainer-teacher-right">
+                            REWARDS INNEN
+                        </div>
                     </div>
                     <div class="accordion" id="accordion-teacher-{{ $teacher->id }}">
                         @foreach ($teacher->courses as $courseIndex => $course)
@@ -62,7 +68,7 @@
                                                                                                 <input type="hidden" name="student_id" value="{{ $student->id }}">
                                                                                                 <button class="btn custom-reward-btn mr-2" type="submit">Gebruik reward</button>
                                                                                             </form>
-                                                                                            <i class="fa-solid fa-{{ $reward->iconPath }}"></i> - {{ $reward->name }} : {{ $reward->pivot->amount }}
+                                                                                            <i class="fa-solid fa-{{ $reward->iconPath }}" style="margin-left: 5px"></i> - {{ $reward->name }} : {{ $reward->pivot->amount }}
                                                                                         </li>
                                                                                     @endif
 

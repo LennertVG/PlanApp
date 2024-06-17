@@ -14,6 +14,9 @@
                             <!-- Days will be generated here by JavaScript -->
                         </div>
                     </div>
+                    <div class="planny-container-home">
+                        <img src="{{ asset('mascotte.svg') }}" alt="Planny"/>
+                    </div>
                 </div>
                 <div class="inner-right-container-home">
                     <div class="salute-container-home">
@@ -91,7 +94,7 @@
                                         <form method="POST" action="{{ route('task.markInProgress', $task->task_id) }}">
                                             @csrf
                                             <input type="hidden" name="task_id" value="{{ $task->task_id }}">
-                                            <button type="submit" class="btn btn-primary w-100 mt-2">Taak indienen</button>
+                                            <button type="submit" class="custom-reward-btn-home">Taak indienen</button>
                                         </form>
                                     </div>
                                 </div>
@@ -131,7 +134,7 @@
                                         <input type="hidden" name="created_at" value="{{ date('Y-m-d H:i:s') }}">
                                         <input type="hidden" name="createdBy" value="{{ auth()->user()->role_id }}">
 
-                                        <button type="submit" class="btn btn-primary w-100">Taak toevoegen</button>
+                                        <button type="submit" class="custom-reward-btn-home">Taak toevoegen</button>
                                     </div>
                                 </form>
                             </div>
