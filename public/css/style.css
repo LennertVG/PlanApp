@@ -448,3 +448,12 @@ p {
     padding-bottom: 1rem;
     padding-right: 1rem;
 }
+
+.file-upload {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-sm {
+    --bs-btn-padding-y: 0;
+}

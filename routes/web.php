@@ -72,6 +72,10 @@ Route::middleware('auth:sanctum')->group(function () {
     // route for uploading a file
     Route::post('/upload-task-file', [FileUploadController::class, 'uploadTaskFile']);
 
+    // route for deleting a file
+    Route::post('/delete-task-file', [FileUploadController::class, 'deleteTaskFile']);
+
+
     // route for using a reward
     Route::post('/use-reward', [RewardController::class, 'useReward'])->name('task.useReward');
 

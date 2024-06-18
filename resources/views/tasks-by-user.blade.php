@@ -43,8 +43,20 @@
                                         </tr>
                                         <tr>
                                             <th class="table-head" scope="row">Upload</th>
-                                            <td>@if($task->uploadPath)<a href="{{ $task->uploadPath }}" target="_blank">Open File</a>@endif</td>
+                                            <td>
+                                                @if($task->uploadPath)
+                                                    <div class="file-upload">
+                                                        <a href="{{ $task->uploadPath }}" target="_blank">Open File</a>
+                                                        <form method="POST" action="/delete-task-file" style="display: inline;">
+                                                            @csrf
+                                                            <input type="hidden" name="task_id" value="{{ $task->task_id }}">
+                                                            <button type="submit" class="btn btn-danger btn-sm">x</button>
+                                                        </form>
+                                                    </div>
+                                                @endif
+                                            </td>
                                         </tr>
+
                                     </tbody>
                                 </table>
                                 @if ($task->uploadPath == 'NULL' || $task->uploadPath == NULL || !$task->uploadPath)
@@ -52,7 +64,7 @@
                                     @csrf
                                     <input type="hidden" name="task_id" value="{{ $task->task_id }}">
                                     <input class="form-control form-control-sm" id="formFileSm" type="file" name="task_file">
-                                    <button type="submit" class="btn btn-secondary btn-sm mt-2">Upload File</button>                         
+                                    <button type="submit" class="custom-reward-btn-home w-100 mt-2">Bestand uploaden</button>                         
                                         @if ($errors->any())
                                             <div class="alert alert-danger">
                                                 <ul>
