@@ -53,7 +53,7 @@ class TaskController extends Controller
             }])->find($user);
 
             $tasks = $userWithTasks->tasks->map(function ($task) {
-                $task->formatted_deadline = Carbon::parse($task->deadline)->format('d-m-Y');
+                $task->formatted_deadline = Carbon::parse($task->deadline)->format('d-m-Y | H:i');
                 $task->uploadPath = $task->pivot->uploadPath;
                 return $task;
             });
