@@ -41,7 +41,7 @@
                             @endif
                         </div>
                         <div class="salute-home-addtask">
-                            <button id="addTaskButton" class="btn btn-success mb-2">Taak toevoegen</button>
+                            <button id="addTaskButton" class="btn custom-reward-btn mb-2">Taak toevoegen</button>
                         </div>
                     </div>
                     <div class="tasks-container-home">
