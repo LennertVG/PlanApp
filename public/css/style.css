@@ -48,6 +48,10 @@ body {
     height: 100%;
 }
 
+.page-container, .container, .outer-container-home {
+    padding-bottom: 3vh;
+}
+
 body {
     font-family: 'Source Sans 3', sans-serif;
     min-height: 100vh;
