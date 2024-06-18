@@ -49,7 +49,7 @@
                         <div class="row row-cols-1 row-cols-md-3 g-4 custom-grid-tasks">
                             {{-- Only returning tasks that have a deadline in the future, sorted by deadline ascending --}}
                             @foreach ($tasks->filter(function ($task) {
-                                return $task->deadline >= now();
+                                return $task->deadline >= now() && $task->pivot->completed !== 1 && $task->pivot->completed !== 2;
                             })->sortBy('deadline') as $task)
                                 <div class="col">
                                     <div class="card task card-home" style="height: 100%" 
