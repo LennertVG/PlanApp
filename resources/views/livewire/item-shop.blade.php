@@ -9,8 +9,10 @@
                     <div class="col-md-4 mb-4">
                         <div class="card h-100">
                             <div class="card-body">
-                                <i class="fa-solid fa-{{ $reward->iconPath }}"></i>
+                                <div style="display: flex; justify-content: space-between;">
                                 <h5 class="card-title">{{ $reward->name }}</h5>
+                                <i style="font-size: 1.5em" class="fa-solid fa-{{ $reward->iconPath }}"></i>
+                                </div>
                                 <p class="card-text">{{ $reward->pivot->amount }} / {{ $reward->maxAmount }}</p>
                             </div>
                         </div>
@@ -42,11 +44,21 @@
                     <div class="col-md-4 mb-4">
                         <div class="card h-100">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $reward->name }}</h5>
+                                <div style="display: flex; justify-content: space-between">
+                                    <h5 class="card-title">{{ $reward->name }}</h5>
+                                    <i style="font-size: 20px" class="fa-solid fa-{{ $reward->iconPath }}"></i>
+                                </div>
                                 <p class="card-text">{{ $reward->description }}</p>
-                                <p class="card-text"><strong>{{ $reward->price }} coins</strong></p>
-                                <p class="card-text">Max: {{ $reward->maxAmount }}</p>
-                                <button wire:click="buyReward({{ $reward->id }})" class="btn btn-primary">Buy</button>
+                                <hr>
+                                <div style="display: flex; justify-content: space-between ; align-items: flex-end">
+                                    <div>
+                                        <p class="card-text"><strong>{{ $reward->price }} coins</strong></p>
+                                        <p class="card-text">Max: {{ $reward->maxAmount }}</p>
+                                    </div>
+                                    <div>
+                                <button wire:click="buyReward({{ $reward->id }})" class="btn custom-reward-btn" style="margin-left:0px;">Kopen</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
