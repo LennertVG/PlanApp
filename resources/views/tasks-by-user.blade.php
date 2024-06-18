@@ -18,12 +18,26 @@
                 <div class="col">
                     <div class="card" style="height: 100%;">
                         <div class="card-body">
+
+                            <h3 class="tasktype-emblem2" style="background-color:
+                                @if($task->tasktype_id == 1)
+                                    #ef3056; color: white;
+                                @elseif($task->tasktype_id == 2)
+                                    #ffe8a3;
+                                @elseif($task->tasktype_id == 3)
+                                    #9ab87a;
+                                @endif
+                                ">
+                                {{ $task->tasktype->name }}
+                            </h3>
+
                         <div style="display: flex; justify-content: space-between">
                             <h3 class="card-title">{{ $task->tasktype->name}}</h3>
                             @if($task->pivot->completed == 2) <span style="height: 100%;" class="badge bg-success">Compleet</span> @endif
                             @if($task->pivot->completed == 1) <span style="height: 100%;" class="badge bg-secondary">Nog te evalueren</span> @endif
                             @if($task->pivot->completed == 0) <span style="height: 100%;" class="badge bg-danger">Nog niet gestart</span> @endif
                         </div>
+
                             <p class="card-text">
                                 <table class="table task-cards" style="height: auto">
                                     <tbody>
