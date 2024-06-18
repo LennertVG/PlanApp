@@ -1,5 +1,3 @@
-@extends('sections.app')
-@section('content')
 @if(Auth::user())
     <div class="container">
         <div class="row">
@@ -111,4 +109,3 @@
         </div>
     </div>
 @endif
-@endsection
