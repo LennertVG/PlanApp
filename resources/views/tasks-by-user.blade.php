@@ -17,7 +17,18 @@
                 <div class="col">
                     <div class="card" style="height: 100%">
                         <div class="card-body">
-                            <h3 class="card-title">{{ $task->tasktype->name}}</h3>
+                            <h3 class="tasktype-emblem2" style="background-color:
+                                @if($task->tasktype_id == 1)
+                                    #ef3056; color: white;
+                                @elseif($task->tasktype_id == 2)
+                                    #ffe8a3;
+                                @elseif($task->tasktype_id == 3)
+                                    #9ab87a;
+                                @endif
+                                ">
+                                {{ $task->tasktype->name }}
+                            </h3>
+
                             <p class="card-text">
                                 <table class="table task-cards" style="height: auto">
                                     <tbody>
