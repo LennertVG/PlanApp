@@ -232,6 +232,12 @@ p {
     align-items: center;
     height: 5rem;
 }
+.dropdown-menu {
+    z-index: 1000;
+    --bs-dropdown-link-active-bg: #302A4F;
+    --bs-dropdown-link-hover-color: white;
+    --bs-dropdown-link-hover-bg: #7569C3;
+}
 
 .userstats-container-large {
     position: absolute;
