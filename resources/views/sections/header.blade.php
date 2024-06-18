@@ -32,7 +32,7 @@
                 </a>
 
                 @if(Auth::check() && Auth::user()->role_id == 4)
-                <div class="userstats-container">
+                <div class="userstats-container-large">
                         @livewire('userstats')
                 </div>
                 @endif
@@ -43,7 +43,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav ms-auto">
                         @if(Auth::check() && Auth::user()->role_id == 3)
-                            <li class="nav-item dropdown" style="display: flex; align-items: center;">
+                            <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Klasmanagement
                                 </a>
@@ -55,7 +55,7 @@
                         @endif
                         
                         @if(Auth::check() && Auth::user()->role_id == 4)
-                        <li class="nav-item dropdown" style="display: flex; align-items: center;">
+                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Taken
                             </a>
@@ -64,7 +64,7 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item dropdown" style="display: flex; align-items: center;">
+                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Beloningen
                             </a>
@@ -74,7 +74,7 @@
                         </li>
                         @endif
                         @if(Auth::guest())
-                            <li class="nav-item dropdown" style="display: flex; align-items: center;">
+                            <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="/account" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Account
                                 </a>
@@ -84,7 +84,7 @@
                                 </ul>
                             </li>
                         @else
-                            <li class="nav-item dropdown" style="display: flex; align-items: center;">
+                            <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="/account" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     {{ Auth::user()->firstname }}
                                 </a>
@@ -102,5 +102,4 @@
             </div>
         </nav>
     </header>
-</body>
-</html>
+{{-- body and html get closed in the footer.blade.php --}}

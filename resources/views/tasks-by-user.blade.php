@@ -2,6 +2,11 @@
 @section('content')
 @if(Auth::user())
 <div class="container">
+    @if (Auth::user()->role_id == 4)
+        <div class="userstats-container-small">
+            @livewire('userstats')
+        </div>
+    @endif
     <div class="row">
         <div class="col-md-12">
             <div class="titlecontainer-tasks">

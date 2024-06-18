@@ -6,6 +6,11 @@
             $courses = \App\Models\Course::all();
         ?>
         <div class="page-container">
+                    @if (Auth::user()->role_id == 4)
+                        <div class="userstats-container-small">
+                            @livewire('userstats')
+                        </div>
+                    @endif
             <div class="outer-container-home">
                 <div class="inner-left-container-home">
                     <div class="calendar-home">
@@ -40,13 +45,14 @@
                         </div>
                     </div>
                     <div class="tasks-container-home">
-                        <div class="row row-cols-1 row-cols-md-3 custom-grid-tasks">
+
+                        <div class="row row-cols-1 row-cols-md-3 g-4 custom-grid-tasks">
                             {{-- Only returning tasks that have a deadline in the future, sorted by deadline ascending --}}
                             @foreach ($tasks->filter(function ($task) {
                                 return $task->deadline >= now();
                             })->sortBy('deadline') as $task)
                                 <div class="col">
-                                    <div class="card task card-home" 
+                                    <div class="card task card-home" style="height: 100%" 
                                          data-course="{{ $task->course->name }}" 
                                          data-tasktype="{{ $task->tasktype->name }}" 
                                          data-name="{{ $task->name }}" 
