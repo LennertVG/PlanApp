@@ -103,10 +103,21 @@
                                 <p id="modalDeadline"></p>
                                 <p id="modalDescription"></p>
 
-                                <form method="POST" action="/task/mark-in-progress/{task}">
+                                <form method="POST" action="/upload-task-file" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="task_id" id="hiddenTaskId" value="task_id">
+                                    <input class="form-control form-control-sm mt-1" id="formFileSm" type="file" name="task_file">
                                     <button type="submit" class="custom-reward-btn-home w-100 mt-2">Taak indienen</button>
+
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
                                 </form>
                             </div>
                         </div>
