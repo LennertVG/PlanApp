@@ -123,7 +123,7 @@
                                         <textarea id="description" name="description" class="form-control mb-2"></textarea>
 
                                         <label for="deadline">Deadline</label>
-                                        <input id="deadline" name="deadline" class="form-control mb-2" type="date">
+                                        <input id="deadline" name="deadline" class="form-control mb-2" type="datetime-local">
 
                                         <label for="course">Vak</label>
                                         <select id="course" name="course" class="form-control mb-2">
