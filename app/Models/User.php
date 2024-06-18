@@ -31,7 +31,7 @@ class User extends VoyagerUser
 
     public function tasks()
     {
-        return $this->belongsToMany(Task::class)->withPivot('uploadPath', 'completed');
+        return $this->belongsToMany(Task::class)->withPivot('uploadPath', 'completed', 'submitted_at');
     }
 
     public function courses()

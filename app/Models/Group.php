@@ -20,4 +20,9 @@ class Group extends Model
     {
         return $this->belongstoMany(User::class);
     }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
 }
