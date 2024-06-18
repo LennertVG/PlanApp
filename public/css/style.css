@@ -299,11 +299,6 @@ p {
     border-style: none;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-    --bs-card-spacer-y: none;
-    --bs-card-spacer-x: none;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-right: 1rem;
 }
 
 .card:hover {
@@ -392,4 +387,23 @@ p {
 
 .task-card-icon {
     width: 2.5rem;
+}
+
+.card-student {
+    border-style: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    --bs-card-spacer-y: none;
+    --bs-card-spacer-x: none;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-right: 1rem;
+}
+
+.card-home {
+    --bs-card-spacer-y: none;
+    --bs-card-spacer-x: none;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-right: 1rem;
 }

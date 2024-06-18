@@ -46,7 +46,7 @@
                                 return $task->deadline >= now();
                             })->sortBy('deadline') as $task)
                                 <div class="col">
-                                    <div class="card task" 
+                                    <div class="card task card-home" 
                                          data-course="{{ $task->course->name }}" 
                                          data-tasktype="{{ $task->tasktype->name }}" 
                                          data-name="{{ $task->name }}" 
