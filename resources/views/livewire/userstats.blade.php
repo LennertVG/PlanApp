@@ -1,24 +1,24 @@
 <div wire:poll.5s="updateStats" class="userstats" style="background-color: #2c3e50; padding-left: 20px; padding-right: 20px; border-radius: 10px; color: white; padding-bottom: 20px;">
     <span> {{ $xp }}/{{ $maxXp }} XP -
-     Level {{ $level }} - 
+     LVL {{ $level }} - 
      {{ $coins }} <i class="fa-solid fa-sack-dollar"></i>
      
      <?php
         {{-- display an image based on the streakCount --}}
         if ($streakCount > 0 && $streakCount < 5) {
-            echo ' - streak: ' . $streakCount;
+            echo ' - ' . $streakCount;
         }
         elseif ($streakCount >= 5 && $streakCount < 10) {
-            echo ' - streak: ' . $streakCount . ' <i class="fa-solid fa-fire-flame-curved" style="color: yellow;"></i> x1.25';
+            echo ' - ' . $streakCount . ' <i class="fa-solid fa-fire-flame-curved" style="color: yellow;"></i> = x1.25';
         }
         elseif ($streakCount >= 10 && $streakCount < 15) {
-            echo ' - streak: ' . $streakCount . ' <i class="fa-solid fa-fire-flame-simple" style="color: orange;"></i> x1.5';
+            echo ' - ' . $streakCount . ' <i class="fa-solid fa-fire-flame-simple" style="color: orange;"></i> = x1.5';
         }
         elseif ($streakCount >= 15 && $streakCount < 20) {
-            echo ' - streak: ' . $streakCount . ' <i class="fa-solid fa-fire" style="color: red;"></i> x1.75';
+            echo ' - ' . $streakCount . ' <i class="fa-solid fa-fire" style="color: red;"></i> = x1.75';
         }
         elseif ($streakCount >= 20) {
-            echo ' - streak: ' . $streakCount . ' <i class="fa-solid fa-fire" style="color: aqua;"></i> x2';
+            echo ' - ' . $streakCount . ' <i class="fa-solid fa-fire" style="color: aqua;"></i> = x2';
         }
      ?>
      

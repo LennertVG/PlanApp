@@ -178,6 +178,23 @@ p {
         flex: 0 0 50%;
         max-width: 50%;
     }
+    .userstats-container-large {
+        display: none;
+    }
+    .navbar-collapse {
+        position: absolute;
+        top: 5rem;
+        right:0;
+        width: 100%;
+        background-color: white;
+        z-index: 1000;
+        padding: 1rem;
+    }
+}
+@media (min-width: 992px) {
+    .userstats-container-small {
+        display: none !important;
+    }
 }
 
 @media (max-width: 772px) {
@@ -185,6 +202,16 @@ p {
         flex: 0 0 100%;
         max-width: 100%;
     }
+}
+@media (max-width: 1200px) {
+    .calendar, .calendar-home, .days-calendar-home {
+        display : none;
+    }
+}
+
+.nav-item {
+    z-index: 1000;
+    align-items: center;
 }
 
 .navbar {
@@ -194,10 +221,20 @@ p {
     height: 5rem;
 }
 
-.userstats-container {
+.userstats-container-large {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+}
+.userstats-container-small {
+    justify-self: center;
+    align-self: center;
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .navbar-content {
