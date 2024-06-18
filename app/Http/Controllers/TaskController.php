@@ -6,15 +6,18 @@ use App\Services\CalculationService;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+
 use App\Models\Task;
 use App\Models\User;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Log;
 use App\Models\Course;
 use App\Models\TaskType;
-use Illuminate\Support\Facades\DB;
+
 use App\Mail\TaskSubmitted;
-use Illuminate\Support\Facades\Mail;
+
+use Carbon\Carbon;
 
 class TaskController extends Controller
 {
@@ -71,7 +74,7 @@ class TaskController extends Controller
             return redirect('/')->with('error', 'Task not found.');
         }
 
-        // Update the pivot record
+        // Update the completed status to 1 for in progress
         $task->users()->updateExistingPivot($user->id, ['completed' => 1, 'submitted_at' => now()]);
 
         // Retrieve the course associated with the task
@@ -85,9 +88,6 @@ class TaskController extends Controller
         // Retrieve the teacher associated with the course
         $teacher = $course->users()->first();
 
-        // Retrieve the grade and class from the groups table
-        $group = $course->groups()->first();
-
         if (!$teacher) {
             Log::error('Teacher not found for course_id: ' . $course->id);
             return redirect('/')->with('error', 'Teacher not found.');
@@ -95,6 +95,14 @@ class TaskController extends Controller
 
         // Get the email of the teacher
         $teacherEmail = $teacher->email;
+
+        // Retrieve the group associated with the task
+        $group = $course->groups()->first();
+
+        if (!$group) {
+            Log::error('Group not found for course_id: ' . $course->id);
+            return redirect('/')->with('error', 'Group not found.');
+        }
 
         // Retrieve the grade and class from the groups table
         $grade = $group->grade;
@@ -116,15 +124,10 @@ class TaskController extends Controller
         $requiredXp = $this->calculationService->calculateRequiredXp();
         $rewardMultiplier = $this->calculationService->calculateRewardMultiplier();
 
-
         if (!$task) {
             Log::error('Task not found for task_id: ' . $request->task_id);
             return redirect('/tasks-by-user')->with('error', 'Task not found.');
         }
-
-        // dd($task, $user, $requiredXp, $rewardMultiplier, $pivotRecord);
-
-
 
         if (!$pivotRecord) {
             Log::error('Pivot record not found for user_id: ' . $user->id . ' and task_id: ' . $request->task_id);
@@ -137,7 +140,6 @@ class TaskController extends Controller
         $submittedAt = Carbon::parse($pivotRecord->pivot->submitted_at);
         $deadline = Carbon::parse($task->deadline);
         $createdAt = Carbon::parse($task->created_at);
-
 
         if ($deadline >= $submittedAt) {
             $user->streakCount += 1;
@@ -157,7 +159,6 @@ class TaskController extends Controller
             $user->coins += 2;
             $user->xp += 2;
         }
-
 
         if ($user->xp >= $requiredXp) {
             $user->xp = $user->xp - $requiredXp;
@@ -214,7 +215,6 @@ class TaskController extends Controller
             }
 
             // Retrieve the teacher associated with the course
-            // Assuming the teacher is the first user found in the course_user pivot table
             $teacher = $course->users()->first();
 
             if (!$teacher) {
@@ -224,7 +224,6 @@ class TaskController extends Controller
             // Return the teacher's email
             return response()->json(['teacher_email' => $teacher->email], 200);
         }
-
         return response()->json(['error' => 'Unauthorized'], 401);
     }
 }

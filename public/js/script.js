@@ -82,3 +82,38 @@ document.addEventListener('DOMContentLoaded', (event) => {
         hideModal(taskForm);
     });
 });
+
+
+// Calendar
+function generateCalendar() {
+    const today = new Date();
+    const currentMonth = today.getMonth();
+    const currentYear = today.getFullYear();
+    const currentDate = today.getDate();
+
+    const monthYear = document.getElementById('monthYear');
+    monthYear.innerText = today.toLocaleString('default', { month: 'long' }) + ' ' + currentYear;
+
+    const daysContainer = document.getElementById('days');
+    daysContainer.innerHTML = '';
+
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+    // Add empty divs for days of the previous month
+    for (let i = 0; i < firstDay; i++) {
+        daysContainer.appendChild(document.createElement('div'));
+    }
+
+    // Add divs for each day of the current month
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dayDiv = document.createElement('div');
+        dayDiv.innerText = day;
+        dayDiv.classList.add('day');
+        if (day === currentDate) {
+            dayDiv.classList.add('today');
+        }
+        daysContainer.appendChild(dayDiv);
+    }
+}
+generateCalendar();

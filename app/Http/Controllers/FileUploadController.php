@@ -5,16 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 use App\Models\Task;
 use App\Models\User;
-use Illuminate\Support\Facades\Log;
 
 class FileUploadController extends Controller
 {
     public function uploadTaskFile(Request $request)
     {
-
         $request->validate([
             'task_file' => 'required|file|max:2048|mimes:pdf,doc,docx,jpeg,png',
         ]);
