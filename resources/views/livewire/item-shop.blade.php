@@ -46,7 +46,7 @@
                                 <p class="card-text">{{ $reward->description }}</p>
                                 <p class="card-text"><strong>{{ $reward->price }} coins</strong></p>
                                 <p class="card-text">Max: {{ $reward->maxAmount }}</p>
-                                <button wire:click="buyReward({{ $reward->id }})" class="btn btn-primary">Buy</button>
+                                <button wire:click="buyReward({{ $reward->id }})" class="btn custom-reward-btn" style="margin-left:0px;">Kopen</button>
                             </div>
                         </div>
                     </div>
