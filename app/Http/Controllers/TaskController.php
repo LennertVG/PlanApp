@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Course;
 use App\Models\TaskType;
 use Illuminate\Support\Facades\DB;
+use App\Mail\TaskSubmitted;
+use Illuminate\Support\Facades\Mail;
 
 class TaskController extends Controller
 {
@@ -61,7 +63,7 @@ class TaskController extends Controller
 
     public function markTaskInProgress(Request $request)
     {
-        $task = Task::find($request->task_id); // Use task_id here
+        $task = Task::find($request->task_id);
         $user = Auth::user();
 
         if (!$task) {
@@ -70,15 +72,10 @@ class TaskController extends Controller
         }
 
         // Update the pivot record
-        // $task->users()->updateExistingPivot($user->id, ['completed' => 1, 'submitted_at' => now()]);
+        $task->users()->updateExistingPivot($user->id, ['completed' => 1, 'submitted_at' => now()]);
 
-        // Carbon::parse($task->users()->first()->pivot->submitted_at);
-        // Carbon::parse($task->deadline);
-        // Carbon::parse($task->created_at);
-
-        // RETREIVAL OF EMAIL OF TEACHER FROM COURSE
         // Retrieve the course associated with the task
-        $course = $task->course; // Get the Course object instead of the name
+        $course = $task->course;
 
         if (!$course) {
             Log::error('Course not found for task_id: ' . $request->task_id);
@@ -86,15 +83,25 @@ class TaskController extends Controller
         }
 
         // Retrieve the teacher associated with the course
-        $teacher = $course->users()->first(); // Assuming the users relationship exists and includes teachers
+        $teacher = $course->users()->first();
+
+        // Retrieve the grade and class from the groups table
+        $group = $course->groups()->first();
 
         if (!$teacher) {
             Log::error('Teacher not found for course_id: ' . $course->id);
             return redirect('/')->with('error', 'Teacher not found.');
         }
 
-        // Debug dump the teacher
-        dd($teacher);
+        // Get the email of the teacher
+        $teacherEmail = $teacher->email;
+
+        // Retrieve the grade and class from the groups table
+        $grade = $group->grade;
+        $class = $group->class;
+
+        // Send email to the teacher
+        Mail::to($teacherEmail)->send(new TaskSubmitted($task, $user, $grade, $class));
 
         return back();
     }

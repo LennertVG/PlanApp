@@ -28,4 +28,9 @@ class Course extends Model
         return $this->belongstoMany(User::class);
     }
 
+    public function teachers()
+    {
+        return $this->belongsToMany(User::class, 'course_user', 'course_id', 'user_id')
+                    ->wherePivot('role_id', 3);
+    }
 }

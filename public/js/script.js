@@ -31,10 +31,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             document.getElementById("modalTaskName").innerText = task.dataset.name;
             document.getElementById("modalDeadline").innerText = task.dataset.deadline;
             document.getElementById("modalDescription").innerText = task.dataset.description;
-            document.getElementById("modalCreatedBy").innerText = "Created by: " + task.dataset.createdby;
-
             const form = document.querySelector("#taskModal form");
-            form.action = `/task/mark-in-progress/${taskId}`;
             document.getElementById("hiddenTaskId").value = taskId;
 
             showModal(modal);

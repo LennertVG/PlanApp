@@ -102,12 +102,11 @@
                                 <p id="modalTaskName"></p>
                                 <p id="modalDeadline"></p>
                                 <p id="modalDescription"></p>
-                                <p id="modalCreatedBy"></p>
 
                                 <form method="POST" action="/task/mark-in-progress/{task}">
                                     @csrf
                                     <input type="hidden" name="task_id" id="hiddenTaskId" value="task_id">
-                                    <button type="submit" class="custom-reward-btn-home">Taak indienen</button>
+                                    <button type="submit" class="custom-reward-btn-home w-100 mt-2">Taak indienen</button>
                                 </form>
                             </div>
                         </div>
@@ -145,7 +144,7 @@
                                         <input type="hidden" name="created_at" value="{{ date('Y-m-d H:i:s') }}">
                                         <input type="hidden" name="createdBy" value="{{ auth()->user()->role_id }}">
 
-                                        <button type="submit" class="custom-reward-btn-home">Taak toevoegen</button>
+                                        <button type="submit" class="custom-reward-btn-home w-100 mt-1">Taak toevoegen</button>
                                     </div>
                                 </form>
                             </div>

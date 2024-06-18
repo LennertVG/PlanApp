@@ -11,7 +11,7 @@ class Task extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class)->withPivot('uploadPath', 'completed');
+        return $this->belongsToMany(User::class)->withPivot('uploadPath', 'completed', 'submitted_at');
     }
 
     public function course()
@@ -22,5 +22,10 @@ class Task extends Model
     public function taskType()
     {
         return $this->belongsTo(TaskType::class, 'tasktype_id');
+    }
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
     }
 }
