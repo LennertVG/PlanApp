@@ -15,6 +15,8 @@ use App\Models\User;
 use App\Models\Course;
 use App\Models\TaskType;
 
+use App\Http\Controllers\FileUploadController;
+
 use App\Mail\TaskSubmitted;
 
 use Carbon\Carbon;
@@ -110,20 +112,19 @@ class TaskController extends Controller
 
         // Send email to the teacher
         Mail::to($teacherEmail)->send(new TaskSubmitted($task, $user, $grade, $class));
-
-        return back();
     }
 
     public function confirmCompletion(Request $request)
     {
         $task = Task::find($request->task_id);
         $user = User::find($request->student_id);
+        $user_id = $request->student_id;
         // Get the pivot record for the task and the authenticated user
         $pivotRecord = $task->users()->where('user_id', $user->id)->first();
 
-        $requiredXp = $this->calculationService->calculateRequiredXp();
-        $rewardMultiplier = $this->calculationService->calculateRewardMultiplier();
-
+        $requiredXp = $this->calculationService->calculateRequiredXp($user_id);
+        $rewardMultiplier = $this->calculationService->calculateRewardMultiplier($user_id);
+        
         if (!$task) {
             Log::error('Task not found for task_id: ' . $request->task_id);
             return redirect('/tasks-by-user')->with('error', 'Task not found.');

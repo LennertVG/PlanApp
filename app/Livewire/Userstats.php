@@ -16,6 +16,7 @@ class Userstats extends Component
     public $coins;
     public $progressPercentage;
     public $maxXp;
+    public $user_id;
 
     protected $calculationService;
 
@@ -38,13 +39,14 @@ class Userstats extends Component
     public function updateStats()
     {
         $this->user = User::find(Auth::user()->id);
+        $user_id = $this->user->id;
 
         $this->streakCount = $this->user->streakCount;
         $this->xp = $this->user->xp;
         $this->level = $this->user->level;
         $this->coins = $this->user->coins;
 
-        $requiredXp = $this->calculationService->calculateRequiredXp();
+        $requiredXp = $this->calculationService->calculateRequiredXp($user_id);
         $this->maxXp = $requiredXp;
         $this->progressPercentage = ($this->xp / $requiredXp) * 100;
         $this->progressPercentage = max(0, min(100, $this->progressPercentage));

@@ -2,20 +2,22 @@
 
 namespace App\Services;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class CalculationService
 {
+    public $user_id;
     
-    public function calculateRequiredXp()
+    public function calculateRequiredXp($user_id)
     {
-        $user = Auth::user();
+        $user = User::find($user_id);
         $requiredXp = ($user->level + 1) * 100;
         return $requiredXp;
     }
 
-    public function calculateRewardMultiplier()
+    public function calculateRewardMultiplier($user_id)
     {
-        $user = Auth::user();
+        $user = User::find($user_id);
         $rewardMultiplier = 1;
 
         // Determine the reward multiplier based on the streak count

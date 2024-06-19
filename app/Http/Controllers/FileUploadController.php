@@ -7,11 +7,20 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
+use App\Http\Controllers\TaskController;
+
 use App\Models\Task;
 use App\Models\User;
 
 class FileUploadController extends Controller
 {
+    protected $taskController;
+
+    public function __construct(TaskController $taskController)
+    {
+        $this->taskController = $taskController;
+    }
+
     public function uploadTaskFile(Request $request)
     {
         $request->validate([
@@ -23,9 +32,11 @@ class FileUploadController extends Controller
 
         $path = $request->file('task_file')->store('uploads', 'public');
 
-        $task->users()->updateExistingPivot($user->id, ['uploadPath' => '/storage/' .$path]);
+        $task->users()->updateExistingPivot($user->id, ['uploadPath' => '/storage/' . $path]);
 
         $task->users()->updateExistingPivot($user->id, ['completed' => 1]);
+
+        $this->taskController->markTaskInProgress($request);
 
         return redirect()->back()->with('success', 'Task file uploaded successfully!');
     }
