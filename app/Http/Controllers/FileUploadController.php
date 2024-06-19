@@ -24,7 +24,7 @@ class FileUploadController extends Controller
     public function uploadTaskFile(Request $request)
     {
         $request->validate([
-            'task_file' => 'required|file|max:2048|mimes:pdf,doc,docx,jpeg,png',
+            'task_file' => 'required|file|max:8192|mimes:pdf,doc,docx,jpeg,png',
         ]);
 
         $task = Task::find($request->task_id);
